@@ -25,6 +25,9 @@ CONFIG = {
     "EXPORT_CSV": "discounts.csv",
     "EXPORT_HTML": "index.html",
     "EXPORT_JSON": "discounts.json",
+    "EXPORT_SETTINGS": "settings.json",
+    # شناسه اختصاصی دیتابیس ابری شما (Cloud DB)
+    "CLOUD_DB_KEY": "duck_store_zanjani_db_v1",
     "ADMIN_TELEGRAM_LINK": "https://t.me/Zanjani_a",
     "TELEGRAM_BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN", ""),
     "TELEGRAM_CHAT_ID": os.getenv("TELEGRAM_CHAT_ID", ""),
@@ -76,7 +79,7 @@ def generate_tg_nft_link(name: str, number: str) -> str:
 
 
 def generate_duck_store_html(deals: List[Dict[str, Any]]):
-    """تولید فروشگاه کامل Duck Store شامل گیفت، استارز، پرمیوم و پنل ادمین"""
+    """تولید وب‌سایت فروشگاهی Duck Store متصل به دیتابیس ابری"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     collections_map = {}
@@ -178,10 +181,10 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             </div>
             <div class="flex items-center gap-2">
                 <!-- دکمه پنل ادمین -->
-                <button onclick="openAdminModal()" class="w-9 h-9 rounded-xl bg-[#1d2232] hover:bg-[#272e44] text-gray-300 hover:text-amber-400 flex items-center justify-center border border-gray-700/60 transition shadow-sm" title="پنل مدیریت">
+                <button onclick="openAdminModal()" class="w-9 h-9 rounded-xl bg-[#1d2232] hover:bg-[#272e44] text-gray-300 hover:text-amber-400 flex items-center justify-center border border-gray-700/60 transition shadow-sm" title="پنل مدیریت قیمت‌ها">
                     <i class="fa-solid fa-gear text-sm"></i>
                 </button>
-                <a href="https://t.me/Zanjani_a" target="_blank" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#1d2232] hover:bg-[#272e44] text-gray-200 border border-gray-700/60 transition shadow-sm">
+                <a id="headerSupportLink" href="https://t.me/Zanjani_a" target="_blank" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#1d2232] hover:bg-[#272e44] text-gray-200 border border-gray-700/60 transition shadow-sm">
                     <i class="fa-brands fa-telegram text-blue-400"></i>
                     <span>پشتیبانی</span>
                 </a>
@@ -230,7 +233,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             <div id="dealsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
         </section>
 
-        <!-- ================= تب دوم: استارز تلگرام (کاملاً مشابه عکس) ================= -->
+        <!-- ================= تب دوم: استارز تلگرام ================= -->
         <section id="section-stars" class="hidden max-w-xl mx-auto space-y-6">
             <div class="bg-[#141722] p-5 rounded-3xl border border-gray-800">
                 <h3 class="text-sm font-bold text-gray-200 mb-3 flex items-center gap-2">
@@ -265,7 +268,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             </div>
         </section>
 
-        <!-- ================= تب سوم: تلگرام پرمیوم (کاملاً مشابه عکس) ================= -->
+        <!-- ================= تب سوم: تلگرام پرمیوم ================= -->
         <section id="section-premium" class="hidden max-w-xl mx-auto space-y-6">
             <div class="bg-[#141722] p-6 rounded-3xl border border-gray-800 space-y-4">
                 <div class="flex items-center justify-between">
@@ -277,7 +280,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                     </span>
                 </div>
 
-                <!-- گزینه‌های اشتراک مطابق تصویر -->
                 <div class="space-y-3" id="premiumOptionsList"></div>
 
                 <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
@@ -316,7 +318,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         </div>
     </div>
 
-    <!-- ⚙️ پنل مدیریت ادمین آنلاین -->
+    <!-- ⚙️ پنل مدیریت ادمین آنلاین (متصل به Cloud DB) -->
     <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
         <div class="modal-bg w-full max-w-md rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
             <div class="px-6 py-4 flex items-center justify-between border-b border-gray-800">
@@ -324,23 +326,27 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                     <i class="fa-solid fa-xmark text-xs"></i>
                 </button>
                 <h3 class="text-sm font-black text-white flex items-center gap-2">
-                    <i class="fa-solid fa-lock text-amber-400"></i> پنل مدیریت قیمت‌ها
+                    <i class="fa-solid fa-lock text-amber-400"></i> پنل مدیریت دیتابیس ابری
                 </h3>
                 <div class="w-7"></div>
             </div>
 
             <!-- فرم ورود با پسورد -->
             <div id="adminLoginForm" class="p-6 space-y-4">
-                <p class="text-xs text-gray-400 text-center">رمز عبور ادمین را وارد کنید (پیش‌فرض: admin123)</p>
+                <p class="text-xs text-gray-400 text-center">رمز عبور ادمین را برای دسترسی به دیتابیس وارد کنید:</p>
                 <input type="password" id="adminPasswordInput" placeholder="رمز عبور ادمین..." 
                        class="w-full bg-[#1a1d26] border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-center text-white focus:outline-none focus:border-amber-500">
                 <button onclick="verifyAdminPassword()" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs rounded-xl transition">
-                    ورود به پنل
+                    ورود به دیتابیس ابری
                 </button>
             </div>
 
             <!-- داشبورد تنظیمات ادمین -->
             <div id="adminSettingsDashboard" class="p-5 space-y-4 overflow-y-auto flex-1 hidden text-xs">
+                <div class="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-[11px] text-blue-300">
+                    ☁️ <b>دیتابیس ابری متصل است:</b> با زدن دکمه ذخیره، قیمت‌ها و رمز عبور بلافاصله در کل جهان برای همه کاربران به‌روز می‌شود.
+                </div>
+
                 <div>
                     <label class="block text-gray-400 mb-1 font-bold">نرخ هر ۱ دانه استارز (تومان):</label>
                     <input type="number" id="admRatePerStar" class="w-full bg-[#1a1d26] border border-gray-700 rounded-xl px-3 py-2 text-white font-bold">
@@ -371,13 +377,14 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                     <input type="text" id="admTgAdmin" class="w-full bg-[#1a1d26] border border-gray-700 rounded-xl px-3 py-2 text-white font-bold dir-ltr text-left">
                 </div>
 
-                <div>
-                    <label class="block text-gray-400 mb-1 font-bold">تغییر رمز عبور ادمین:</label>
-                    <input type="password" id="admNewPass" placeholder="رمز جدید (اختیاری)" class="w-full bg-[#1a1d26] border border-gray-700 rounded-xl px-3 py-2 text-white text-center">
+                <div class="pt-2 border-t border-gray-800">
+                    <label class="block text-rose-400 mb-1 font-bold">🔒 تغییر رمز عبور ادمین (جایگزینی در دیتابیس):</label>
+                    <input type="password" id="admNewPass" placeholder="رمز عبور جدید..." class="w-full bg-[#1a1d26] border border-rose-500/40 rounded-xl px-3 py-2 text-white text-center">
                 </div>
 
-                <button onclick="saveAdminSettings()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl transition mt-2">
-                    ذخیره تغییرات و اعمال فوری
+                <button id="saveBtn" onclick="saveAdminSettingsToCloud()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl transition mt-2 flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>ذخیره در دیتابیس و اعمال جهانی</span>
                 </button>
             </div>
         </div>
@@ -404,7 +411,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
             <div id="modalCollectionsList" class="p-3.5 space-y-2 overflow-y-auto flex-1"></div>
 
-            <a href="https://t.me/Zanjani_a" target="_blank" class="w-full py-3 bg-[#0088cc] hover:bg-[#0077b5] text-white text-xs font-bold text-center transition flex items-center justify-center gap-1.5">
+            <a id="modalSupportLink" href="https://t.me/Zanjani_a" target="_blank" class="w-full py-3 bg-[#0088cc] hover:bg-[#0077b5] text-white text-xs font-bold text-center transition flex items-center justify-center gap-1.5">
                 <i class="fa-brands fa-telegram text-sm"></i> پشتیبانی Duck Store
             </a>
         </div>
@@ -425,8 +432,10 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
         const DEALS = __DEALS_JSON__;
         const COLLECTIONS = __COLLECTIONS_JSON__;
+        
+        // کلید دیتابیس ابری همگام
+        const CLOUD_DB_URL = "https://kvdb.io/SsfZ3yXQeAHz59vB42cW7w/__CLOUD_DB_KEY__";
 
-        // تنظیمات پیش‌فرض با قابلیت تغییر توسط ادمین در حافظه
         const DEFAULT_SETTINGS = {
             ratePerStar: 1450,
             prem3: 620000,
@@ -437,12 +446,11 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             adminPass: 'admin123'
         };
 
-        let SETTINGS = JSON.parse(localStorage.getItem('duck_admin_settings') || JSON.stringify(DEFAULT_SETTINGS));
+        let SETTINGS = { ...DEFAULT_SETTINGS };
 
         let currentMainTab = 'gifts';
         let selectedType = 'all';
         let selectedCollection = 'all';
-
         let selectedStarsCount = 50;
         let selectedPremiumMonths = 12;
 
@@ -450,6 +458,31 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
         let favorites = JSON.parse(localStorage.getItem('duck_favs') || '[]');
         let cart = JSON.parse(localStorage.getItem('duck_cart') || '[]');
+
+        // 🌐 بارگذاری زنده قیمت‌ها و تنظیمات از دیتابیس ابری
+        async function fetchCloudSettings() {
+            try {
+                const res = await fetch(CLOUD_DB_URL);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && typeof data === 'object') {
+                        SETTINGS = { ...DEFAULT_SETTINGS, ...data };
+                    }
+                }
+            } catch (err) {
+                console.warn("استفاده از تنظیمات لوکال/پیش‌فرض به علت عدم اتصال:", err);
+            }
+            updateUIWithLatestSettings();
+        }
+
+        function updateUIWithLatestSettings() {
+            document.getElementById('headerSupportLink').href = `https://t.me/${SETTINGS.adminTg}`;
+            document.getElementById('modalSupportLink').href = `https://t.me/${SETTINGS.adminTg}`;
+            renderCards(getFilteredDeals());
+            renderStarsPackages();
+            renderPremiumOptions();
+            updateCartUI();
+        }
 
         function switchMainTab(tab) {
             triggerHaptic('selection');
@@ -464,6 +497,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             const btn = document.getElementById(`tabBtn-${tab}`);
             btn.classList.add('active', 'bg-amber-500', 'text-black');
             btn.classList.remove('bg-[#171b26]', 'text-gray-300');
+            updateCartUI();
         }
 
         // ================= استارز =================
@@ -578,7 +612,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             window.open(`https://t.me/${SETTINGS.adminTg}?text=${msg}`, '_blank');
         }
 
-        // ================= پنل ادمین =================
+        // ================= پنل ادمین متصل به Cloud DB =================
         function openAdminModal() {
             triggerHaptic('light');
             document.getElementById('adminModal').classList.remove('hidden');
@@ -605,30 +639,56 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                 document.getElementById('admPrem12').value = SETTINGS.prem12;
                 document.getElementById('admGiftMonthly').value = SETTINGS.giftMonthlyPrice;
                 document.getElementById('admTgAdmin').value = SETTINGS.adminTg;
+                document.getElementById('admNewPass').value = '';
             } else {
                 alert('❌ رمز عبور اشتباه است.');
             }
         }
 
-        function saveAdminSettings() {
+        async function saveAdminSettingsToCloud() {
             triggerHaptic('heavy');
-            SETTINGS.ratePerStar = parseInt(document.getElementById('admRatePerStar').value) || 1450;
-            SETTINGS.prem3 = parseInt(document.getElementById('admPrem3').value) || 620000;
-            SETTINGS.prem6 = parseInt(document.getElementById('admPrem6').value) || 950000;
-            SETTINGS.prem12 = parseInt(document.getElementById('admPrem12').value) || 1690000;
-            SETTINGS.giftMonthlyPrice = parseInt(document.getElementById('admGiftMonthly').value) || 160000;
-            SETTINGS.adminTg = document.getElementById('admTgAdmin').value.trim().replace('@', '') || 'Zanjani_a';
+            const saveBtn = document.getElementById('saveBtn');
+            saveBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> در حال ذخیره در دیتابیس...';
+            saveBtn.disabled = true;
+
+            const newSettings = {
+                ratePerStar: parseInt(document.getElementById('admRatePerStar').value) || 1450,
+                prem3: parseInt(document.getElementById('admPrem3').value) || 620000,
+                prem6: parseInt(document.getElementById('admPrem6').value) || 950000,
+                prem12: parseInt(document.getElementById('admPrem12').value) || 1690000,
+                giftMonthlyPrice: parseInt(document.getElementById('admGiftMonthly').value) || 160000,
+                adminTg: document.getElementById('admTgAdmin').value.trim().replace('@', '') || 'Zanjani_a',
+                adminPass: SETTINGS.adminPass
+            };
 
             const newPass = document.getElementById('admNewPass').value.trim();
-            if (newPass) SETTINGS.adminPass = newPass;
+            if (newPass) newSettings.adminPass = newPass;
 
-            localStorage.setItem('duck_admin_settings', JSON.stringify(SETTINGS));
-            alert('✅ تنظیمات با موفقیت ذخیره و اعمال شدند.');
-            closeAdminModal();
+            try {
+                // ارسال مستقیم به دیتابیس ابری
+                const res = await fetch(CLOUD_DB_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newSettings)
+                });
 
-            renderCards(getFilteredDeals());
-            renderStarsPackages();
-            renderPremiumOptions();
+                if (res.ok) {
+                    SETTINGS = newSettings;
+                    alert('✅ تغییرات با موفقیت در دیتابیس ابری ذخیره شد و برای همه کاربران اعمال گردید.');
+                    closeAdminModal();
+                    updateUIWithLatestSettings();
+                } else {
+                    throw new Error("خطا در پاسخ دیتابیس");
+                }
+            } catch (err) {
+                SETTINGS = newSettings;
+                alert('⚠️ ذخیره به صورت محلی انجام شد (دیتابیس در دسترس نبود).');
+                closeAdminModal();
+                updateUIWithLatestSettings();
+            } finally {
+                saveBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> <span>ذخیره در دیتابیس و اعمال جهانی</span>';
+                saveBtn.disabled = false;
+            }
         }
 
         // ================= گیفت‌ها و سبد خرید =================
@@ -836,10 +896,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         updateFavCount();
-        updateCartUI();
-        renderCards(DEALS);
-        renderStarsPackages();
-        renderPremiumOptions();
+        fetchCloudSettings();
     </script>
 </body>
 </html>"""
@@ -850,6 +907,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         .replace("__RARE_COUNT__", str(rare_count))
         .replace("__DEALS_JSON__", deals_json)
         .replace("__COLLECTIONS_JSON__", collections_json)
+        .replace("__CLOUD_DB_KEY__", CONFIG["CLOUD_DB_KEY"])
     )
 
     with open(CONFIG["EXPORT_HTML"], "w", encoding="utf-8") as f:
@@ -860,7 +918,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
 
 def send_telegram_package(deals: List[Dict[str, Any]]):
-    """ارسال گزارش تلگرام دسته‌بندی‌شده بر اساس کالکشن"""
     token = CONFIG.get("TELEGRAM_BOT_TOKEN", "").strip()
     chat_id = CONFIG.get("TELEGRAM_CHAT_ID", "").strip()
     if not token or not chat_id:
@@ -979,14 +1036,14 @@ def send_telegram_csv_attachment(
 
 
 # ==========================================
-# ⚡ موتور اسکرپر فوق‌سریع توربو
+# ⚡ موتور اسکرپر
 # ==========================================
 async def main():
     deals_found: List[Dict[str, Any]] = []
     seen_links: Set[str] = set()
 
     print("\n" + "═" * 65)
-    print("  🦆 DUCK STORE TURBO SCRAPER (200 ITEMS) 🦆")
+    print("  🦆 DUCK STORE TURBO SCRAPER (200 ITEMS + CLOUD DB) 🦆")
     print("═" * 65 + "\n")
 
     async with async_playwright() as p:
@@ -1142,7 +1199,9 @@ async def main():
                     ]
                 )
 
-        print(f"\n⚡ فروشگاه ۳ کاره Duck Store با موفقیت آپدیت شد!")
+        print(
+            f"\n⚡ فروشگاه Duck Store با دیتابیس ابری آماده شد!"
+        )
         send_telegram_package(sorted_deals)
 
 
