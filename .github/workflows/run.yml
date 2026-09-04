@@ -5,8 +5,11 @@ on:
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  scrape:
+  scrape-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -22,9 +25,18 @@ jobs:
           pip install -r requirements.txt
           playwright install --with-deps chromium
 
-      - name: Run Scraper
+      - name: Run Scraper & Generate Web Dashboard
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           python bot.py
+
+      - name: Commit & Publish Dashboard to GitHub
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html discounts.csv discounts.json
+          git commit -m "Auto-update deals & web dashboard [skip ci]" || echo "No changes to commit"
+          git push
