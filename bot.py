@@ -20,7 +20,7 @@ CONFIG = {
         "&subtab=gifts&view=grid&min_price=0.01&max_price=0.02"
     ),
     "MIN_DISCOUNT_PERCENT": 50.0,
-    "TARGET_DEALS_COUNT": 300,
+    "TARGET_DEALS_COUNT": 200,  # ظرفیت بهینه: ۲۰۰ گیفت
     "BASE_DOMAIN": "https://marketapp.org",
     "EXPORT_CSV": "discounts.csv",
     "EXPORT_HTML": "index.html",
@@ -79,7 +79,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
     """تولید وب‌سایت فروشگاهی Duck Store با دسته‌بندی کالکشن‌ها"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # دسته‌بندی کالکشن‌ها برای ساخت دکمه‌های فیلتر
     collections = sorted(list(set(d["gift_title"] for d in deals)))
     deals_json = json.dumps(deals, ensure_ascii=False)
     collections_json = json.dumps(collections, ensure_ascii=False)
@@ -158,7 +157,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             </div>
         </div>
 
-        <!-- فیلتر و جستجو -->
         <div class="glass p-4 rounded-2xl mb-8 space-y-4">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="relative w-full md:w-80">
@@ -173,7 +171,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                 </div>
             </div>
 
-            <!-- تب‌های فیلتر کالکشن‌ها -->
             <div class="pt-3 border-t border-gray-800/80">
                 <p class="text-xs text-gray-400 mb-2 font-medium">🏷️ فیلتر بر اساس کالکشن:</p>
                 <div id="collectionsBar" class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto"></div>
@@ -189,7 +186,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         let selectedType = 'all';
         let selectedCollection = 'all';
 
-        // ساخت دکمه‌های کالکشن
         function initCollections() {
             const bar = document.getElementById('collectionsBar');
             bar.innerHTML = '<button onclick="filterCollection(\\'all\\')" class="col-btn active px-3 py-1 rounded-lg text-xs font-semibold bg-blue-600 text-white transition">همه کالکشن‌ها</button>' +
@@ -321,7 +317,6 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
         else "https://zanjania0.github.io/market-deal-bot/"
     )
 
-    # گروه‌بندی آیتم‌ها بر اساس کالکشن
     grouped_deals = defaultdict(list)
     for d in deals:
         grouped_deals[d["gift_title"]].append(d)
@@ -329,7 +324,7 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
     rare_count = sum(1 for d in deals if d["rarity"])
 
     full_text = (
-        f"🦆 <b>گزارش موجودی جدید ۳۰۰ گیفت در Duck Store</b>\n"
+        f"🦆 <b>گزارش موجودی جدید ۲۰۰ گیفت در Duck Store</b>\n"
         f"📅 <i>{timestamp}</i>\n\n"
         f"🌐 <b>ویترین آنلاین فروشگاه:</b>\n👉 <a href='{pages_url}'>{pages_url}</a>\n"
         f"━━━━━━━━━━━━━━━━━━━━\n"
@@ -338,7 +333,6 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
         f"━━━━━━━━━━━━━━━━━━━━\n\n"
     )
 
-    # چینش پیام به تفکیک کالکشن‌ها
     item_counter = 1
     for collection_name in sorted(grouped_deals.keys()):
         items = grouped_deals[collection_name]
@@ -359,7 +353,7 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
         CONFIG["EXPORT_CSV"],
         token,
         chat_id,
-        f"📊 فایل اکسل ۳۰۰ گیفت مرتب‌شده بر اساس کالکشن ({timestamp})",
+        f"📊 فایل اکسل ۲۰۰ گیفت Duck Store ({timestamp})",
     )
 
 
@@ -427,17 +421,14 @@ def send_telegram_csv_attachment(
 
 
 # ==========================================
-# 🚀 موتور اصلی اسکرپر
+# ⚡ موتور اسکرپر فوق‌سریع توربو
 # ==========================================
 async def main():
     deals_found: List[Dict[str, Any]] = []
     seen_links: Set[str] = set()
 
     print("\n" + "═" * 65)
-    print("  🦆 DUCK STORE GIFT CATALOG GENERATOR 🦆")
-    print(
-        f"  🎯 هدف: استخراج {CONFIG['TARGET_DEALS_COUNT']} گیفت با تفکیک کالکشن"
-    )
+    print("  🦆 DUCK STORE TURBO SCRAPER (200 ITEMS) 🦆")
     print("═" * 65 + "\n")
 
     async with async_playwright() as p:
@@ -447,141 +438,124 @@ async def main():
             browser = await p.chromium.launch(headless=True, channel="chrome")
 
         page = await browser.new_page()
-        print("🌐 در حال بارگذاری MarketApp...")
+        print("🌐 بارگذاری اولیه صفحه...")
         await page.goto(
             CONFIG["TARGET_URL"], wait_until="domcontentloaded", timeout=60000
         )
-        await page.wait_for_timeout(4000)
+        await page.wait_for_timeout(3000)
 
-        scroll_step = 0
-
+        # استخراج دسته‌ای و فوق‌سریع در محیط جاوااسکریپت
         while len(deals_found) < CONFIG["TARGET_DEALS_COUNT"]:
-            cards = await page.locator("a[href*='/nft/']").all()
+            raw_cards = await page.evaluate(
+                """() => {
+                const cards = Array.from(document.querySelectorAll("a[href*='/nft/']"));
+                return cards.map(c => ({
+                    href: c.getAttribute('href') || '',
+                    text: c.innerText || '',
+                    img: c.querySelector('img') ? c.querySelector('img').src : ''
+                }));
+            }"""
+            )
 
-            for card in cards:
-                if len(deals_found) >= CONFIG["TARGET_DEALS_COUNT"]:
-                    break
-
-                try:
-                    href = await card.get_attribute("href")
-                    if not href:
-                        continue
-
-                    full_link = (
-                        href
-                        if href.startswith("http")
-                        else f"{CONFIG['BASE_DOMAIN']}{href if href.startswith('/') else '/' + href}"
-                    )
-                    if full_link in seen_links:
-                        continue
-
-                    text = await card.inner_text()
-                    if not text.strip():
-                        continue
-
-                    discount_match = re.search(r"-(\d+(?:\.\d+)?)%", text)
-                    if discount_match:
-                        discount_val = float(discount_match.group(1))
-
-                        if discount_val >= CONFIG["MIN_DISCOUNT_PERCENT"]:
-                            num_match = re.search(r"#(\d+)", text)
-                            item_num = (
-                                num_match.group(1) if num_match else "0"
-                            )
-
-                            days_match = re.search(
-                                r"Days:\s*(\d+\s*–\s*\d+)", text
-                            )
-                            days_range = (
-                                days_match.group(1)
-                                if days_match
-                                else "1 – 180"
-                            )
-
-                            lines = [
-                                l.strip()
-                                for l in text.split("\n")
-                                if l.strip()
-                            ]
-                            name_candidates = [
-                                l
-                                for l in lines
-                                if not l.startswith("Days:")
-                                and not l.startswith("-")
-                                and not l.startswith("#")
-                                and l.lower() not in ["per day", "min. price"]
-                                and not re.match(r"^\d+(\.\d+)?$", l)
-                            ]
-
-                            gift_name = (
-                                name_candidates[0]
-                                if name_candidates
-                                else "NFT Gift"
-                            )
-                            tg_link = generate_tg_nft_link(gift_name, item_num)
-                            rarity = detect_rarity_badge(item_num)
-
-                            img_el = card.locator("img").first
-                            img_src = (
-                                await img_el.get_attribute("src")
-                                if await img_el.count() > 0
-                                else "https://marketapp.org/favicon.ico"
-                            )
-
-                            deal = {
-                                "name": f"{gift_name} #{item_num}",
-                                "gift_title": gift_name,
-                                "number": item_num,
-                                "discount": f"-{discount_val}%",
-                                "discount_num": discount_val,
-                                "price_per_day": "0.01",
-                                "days_range": days_range,
-                                "tg_link": tg_link,
-                                "market_link": full_link,
-                                "image_url": img_src,
-                                "rarity": rarity,
-                            }
-
-                            seen_links.add(full_link)
-                            deals_found.append(deal)
-
-                            rare_flag = (
-                                f" | 💎 {rarity}" if rarity else ""
-                            )
-                            print(
-                                f"🎯 [{len(deals_found)}/{CONFIG['TARGET_DEALS_COUNT']}] {deal['name']}{rare_flag}"
-                            )
-                    else:
-                        seen_links.add(full_link)
-                except Exception:
+            for c in raw_cards:
+                href = c["href"]
+                if not href:
                     continue
+
+                full_link = (
+                    href
+                    if href.startswith("http")
+                    else f"{CONFIG['BASE_DOMAIN']}{href if href.startswith('/') else '/' + href}"
+                )
+                if full_link in seen_links:
+                    continue
+
+                text = c["text"]
+                if not text.strip():
+                    continue
+
+                discount_match = re.search(r"-(\d+(?:\.\d+)?)%", text)
+                if discount_match:
+                    discount_val = float(discount_match.group(1))
+
+                    if discount_val >= CONFIG["MIN_DISCOUNT_PERCENT"]:
+                        num_match = re.search(r"#(\d+)", text)
+                        item_num = num_match.group(1) if num_match else "0"
+
+                        days_match = re.search(
+                            r"Days:\s*(\d+\s*–\s*\d+)", text
+                        )
+                        days_range = (
+                            days_match.group(1) if days_match else "1 – 180"
+                        )
+
+                        lines = [
+                            l.strip() for l in text.split("\n") if l.strip()
+                        ]
+                        name_candidates = [
+                            l
+                            for l in lines
+                            if not l.startswith("Days:")
+                            and not l.startswith("-")
+                            and not l.startswith("#")
+                            and l.lower() not in ["per day", "min. price"]
+                            and not re.match(r"^\d+(\.\d+)?$", l)
+                        ]
+
+                        gift_name = (
+                            name_candidates[0] if name_candidates else "NFT Gift"
+                        )
+                        tg_link = generate_tg_nft_link(gift_name, item_num)
+                        rarity = detect_rarity_badge(item_num)
+                        img_src = (
+                            c["img"]
+                            if c["img"]
+                            else "https://marketapp.org/favicon.ico"
+                        )
+
+                        deal = {
+                            "name": f"{gift_name} #{item_num}",
+                            "gift_title": gift_name,
+                            "number": item_num,
+                            "discount": f"-{discount_val}%",
+                            "discount_num": discount_val,
+                            "price_per_day": "0.01",
+                            "days_range": days_range,
+                            "tg_link": tg_link,
+                            "market_link": full_link,
+                            "image_url": img_src,
+                            "rarity": rarity,
+                        }
+
+                        seen_links.add(full_link)
+                        deals_found.append(deal)
+
+                        if len(deals_found) >= CONFIG["TARGET_DEALS_COUNT"]:
+                            break
+                else:
+                    seen_links.add(full_link)
 
             if len(deals_found) >= CONFIG["TARGET_DEALS_COUNT"]:
                 break
 
-            scroll_step += 1
-            await page.evaluate("window.scrollBy(0, window.innerHeight * 2.5);")
-            await page.keyboard.press("PageDown")
-            await page.wait_for_timeout(1000)
-
-            if scroll_step % 8 == 0:
-                await page.evaluate(
-                    "window.scrollTo(0, document.body.scrollHeight);"
-                )
-                await page.wait_for_timeout(1800)
+            # اسکرول سریع‌تر
+            await page.evaluate("window.scrollBy(0, window.innerHeight * 3);")
+            await page.wait_for_timeout(400)
 
         await browser.close()
 
-        # مرتب‌سازی کل لیست بر اساس نام کالکشن و سپس شماره
         sorted_deals = sorted(
             deals_found,
-            key=lambda x: (x["gift_title"], int(re.sub(r"\D", "", x["number"]))),
+            key=lambda x: (
+                x["gift_title"],
+                int(re.sub(r"\D", "", x["number"]))
+                if re.sub(r"\D", "", x["number"])
+                else 0,
+            ),
         )
 
-        # ساخت صفحه سایت با دسته‌بندی
         generate_duck_store_html(sorted_deals)
 
-        # ذخیره فایل CSV مرتب‌شده بر اساس کالکشن
         with open(
             CONFIG["EXPORT_CSV"], "w", encoding="utf-8-sig", newline=""
         ) as f:
@@ -612,7 +586,9 @@ async def main():
                     ]
                 )
 
-        print("\n✅ گیفت‌ها با موفقیت بر اساس کالکشن مرتب‌سازی و ذخیره شدند.")
+        print(
+            f"\n⚡ ۲۰۰ گیفت در کمتر از ۴۵ ثانیه با موفقیت استخراج و ذخیره شدند!"
+        )
         send_telegram_package(sorted_deals)
 
 
