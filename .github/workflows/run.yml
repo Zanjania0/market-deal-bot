@@ -2,9 +2,7 @@ name: MarketApp Gift Deal Hunter
 
 on:
   schedule:
-    # اجرا به صورت خودکار هر ۳۰ دقیقه یک‌بار
     - cron: '*/30 * * * *'
-  # امکان اجرای دستی هر زمان که خواستید
   workflow_dispatch:
 
 jobs:
@@ -15,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: setup-python@v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
