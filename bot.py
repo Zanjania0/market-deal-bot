@@ -18,7 +18,7 @@ CONFIG = {
         "&subtab=gifts&view=grid&min_price=0.01&max_price=0.02"
     ),
     "MIN_DISCOUNT_PERCENT": 50.0,
-    "TARGET_DEALS_COUNT": 50,
+    "TARGET_DEALS_COUNT": 100,  # افزایش ظرفیت به ۱۰۰ مورد
     "BASE_DOMAIN": "https://marketapp.org",
     "EXPORT_CSV": "discounts.csv",
     "EXPORT_TXT": "discounts.txt",
@@ -33,7 +33,6 @@ CONFIG = {
 # 💎 الگوریتم تشخیص شماره‌های رند و کمیاب
 # ==========================================
 def detect_rarity_badge(number_str: str) -> str:
-    """شناسایی هوشمند شماره‌های رند، زیر ۱۰۰۰، زیر ۱۰۰ و الگوهای خاص"""
     try:
         num = int(re.sub(r"\D", "", str(number_str)))
     except ValueError:
@@ -41,18 +40,30 @@ def detect_rarity_badge(number_str: str) -> str:
 
     s = str(num)
     if num < 100:
-        return "👑 [فوق نایاب: شماره دو رقمی]"
+        return "👑 شماره دو رقمی (فوق نایاب)"
     if num < 1000:
-        return "💎 [کمیاب: زیر ۱۰۰۰]"
+        return f"💎 شماره زیر ۱۰۰۰ (#{num})"
     if len(s) >= 3 and len(set(s)) == 1:
-        return f"✨ [شماره رند: {s}]"
-    if s in ["123", "1234", "12345", "6969", "777", "888", "999", "10000"]:
-        return f"🎯 [الگوی خاص: {s}]"
+        return f"✨ شماره رند یکدست (#{s})"
+    if s in [
+        "123",
+        "1234",
+        "12345",
+        "6969",
+        "777",
+        "888",
+        "999",
+        "10000",
+        "50000",
+        "100000",
+    ]:
+        return f"🎯 الگوی خاص (#{s})"
+    if len(s) == 4 and s == s[::-1]:
+        return f"🔁 شماره متقارن (#{s})"
     return ""
 
 
 def generate_tg_nft_link(name: str, number: str) -> str:
-    """تبدیل نام به فرمت استاندارد NFT تلگرام"""
     words = re.findall(r"[a-zA-Z0-9]+", name)
     slug = "".join(w.capitalize() for w in words)
     clean_num = re.sub(r"\D", "", str(number))
@@ -64,7 +75,7 @@ def generate_tg_nft_link(name: str, number: str) -> str:
 
 
 # ==========================================
-# 📤 ارسال پیام و فایل به تلگرام
+# 📤 ارسال پیام تفکیک‌شده به همراه لیست خالص لینک‌ها
 # ==========================================
 def send_telegram_package(deals: List[Dict[str, Any]]):
     token = CONFIG.get("TELEGRAM_BOT_TOKEN", "").strip()
@@ -74,56 +85,90 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
         print("⚠️ توکن یا چت‌آیدی تلگرام تنظیم نشده است.")
         return
 
-    # آمار و تحلیل
+    rare_deals = [d for d in deals if d["rarity"]]
+    normal_deals = [d for d in deals if not d["rarity"]]
+
     discounts = [d["discount_num"] for d in deals]
     avg_discount = sum(discounts) / len(discounts) if discounts else 0
     max_discount = max(discounts) if discounts else 0
-    rare_count = sum(1 for d in deals if d["rarity"])
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # هدر پیام شامل داشبورد آماری
-    header = (
-        f"👑 <b>گزارش تحلیلی گیفت‌های تخفیف‌دار MarketApp</b>\n"
+    # ۱. متن گزارش تفصیلی
+    full_text = (
+        f"📊 <b>گزارش تحلیلی گیفت‌های تخفیف‌دار MarketApp</b>\n"
         f"📅 <i>{timestamp}</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━\n"
-        f"📊 <b>تعداد کل:</b> {len(deals)} مورد\n"
+        f"🎯 <b>تعداد کل:</b> {len(deals)} مورد\n"
+        f"💎 <b>موارد کمیاب/خاص:</b> {len(rare_deals)} مورد\n"
         f"🔥 <b>بیشترین تخفیف:</b> -{max_discount}%\n"
         f"📉 <b>میانگین تخفیف:</b> -{avg_discount:.1f}%\n"
-        f"💎 <b>تعداد موارد کمیاب/رند:</b> {rare_count} مورد\n"
         f"━━━━━━━━━━━━━━━━━━━━\n\n"
     )
 
-    # تقسیم‌بندی پیام برای رعایت سقف ۴۰۹۶ کاراکتر تلگرام
-    messages = []
-    current_msg = header
-
-    for idx, d in enumerate(deals, 1):
-        rarity_tag = f"\n   {d['rarity']}" if d["rarity"] else ""
-        hot_tag = "🚨 " if d["discount_num"] >= 70 else "🎁 "
-
-        item_text = (
-            f"<b>{idx}. {hot_tag}{d['name']}</b>{rarity_tag}\n"
-            f"   🏷️ تخفیف: <code>{d['discount']}</code> | 💰 {d['price_per_day']} TON/روز\n"
-            f"   🔗 <a href='{d['tg_link']}'>تلگرام</a> | "
-            f"<a href='{d['market_link']}'>مارکت‌اپ</a>\n\n"
+    if rare_deals:
+        full_text += (
+            f"💎 <b>━━━ موارد کمیاب و شماره‌های خاص ({len(rare_deals)} مورد) ━━━</b>\n\n"
         )
+        for idx, d in enumerate(rare_deals, 1):
+            hot_tag = "🚨 " if d["discount_num"] >= 70 else "⭐ "
+            full_text += (
+                f"<b>{idx}. {hot_tag}{d['name']}</b>\n"
+                f"   🏆 <b>{d['rarity']}</b>\n"
+                f"   🏷️ تخفیف: <code>{d['discount']}</code> | 💰 {d['price_per_day']} TON/روز\n"
+                f"   🔗 <a href='{d['tg_link']}'>مشاهده در تلگرام</a> | "
+                f"<a href='{d['market_link']}'>لینک مارکت</a>\n\n"
+            )
 
-        if len(current_msg) + len(item_text) > 3800:
-            messages.append(current_msg)
-            current_msg = item_text
+    if normal_deals:
+        full_text += (
+            f"🎁 <b>━━━ سایر گیفت‌های تخفیف‌دار ({len(normal_deals)} مورد) ━━━</b>\n\n"
+        )
+        for idx, d in enumerate(normal_deals, 1):
+            hot_tag = "🚨 " if d["discount_num"] >= 70 else "🔹 "
+            full_text += (
+                f"<b>{idx}. {hot_tag}{d['name']}</b>\n"
+                f"   🏷️ تخفیف: <code>{d['discount']}</code> | 💰 {d['price_per_day']} TON/روز\n"
+                f"   🔗 <a href='{d['tg_link']}'>تلگرام</a> | "
+                f"<a href='{d['market_link']}'>مارکت‌اپ</a>\n\n"
+            )
+
+    # ۲. ساخت متن مجزا برای لیست خالص لینک‌های تلگرام
+    links_text = (
+        f"📋 <b>━━━ لیست فقط لینک‌های تلگرام ({len(deals)} مورد) ━━━</b>\n\n"
+    )
+    for idx, d in enumerate(deals, 1):
+        links_text += f"{idx}. {d['tg_link']}\n"
+
+    # ارسال تمام پیام‌ها با مدیریت سقف کاراکتر
+    send_chunks_to_telegram(full_text, token, chat_id)
+    time.sleep(1)
+    send_chunks_to_telegram(links_text, token, chat_id)
+
+    # ارسال فایل اکسل به عنوان ضمیمه
+    send_telegram_csv_attachment(
+        CONFIG["EXPORT_CSV"], token, chat_id, f"📊 فایل اکسل گزارش ({timestamp})"
+    )
+
+
+def send_chunks_to_telegram(text: str, token: str, chat_id: str):
+    chunks = []
+    current_chunk = ""
+    for paragraph in text.split("\n\n"):
+        if len(current_chunk) + len(paragraph) + 2 > 3800:
+            chunks.append(current_chunk.strip())
+            current_chunk = paragraph + "\n\n"
         else:
-            current_msg += item_text
+            current_chunk += paragraph + "\n\n"
 
-    if current_msg:
-        messages.append(current_msg)
+    if current_chunk.strip():
+        chunks.append(current_chunk.strip())
 
-    # ۱. ارسال پیام‌های متنی
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    for msg in messages:
+    for part in chunks:
         payload = urllib.parse.urlencode(
             {
                 "chat_id": chat_id,
-                "text": msg,
+                "text": part,
                 "parse_mode": "HTML",
                 "disable_web_page_preview": "true",
             }
@@ -136,16 +181,10 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
         except Exception as e:
             print(f"⚠️ خطا در ارسال پیام: {e}")
 
-    # ۲. ارسال فایل اکسل به عنوان ضمیمه
-    send_telegram_csv_attachment(
-        CONFIG["EXPORT_CSV"], token, chat_id, f"📊 فایل اکسل گزارش ({timestamp})"
-    )
-
 
 def send_telegram_csv_attachment(
     file_path: str, token: str, chat_id: str, caption: str
 ):
-    """ارسال مستقیم فایل اکسل CSV به چت تلگرام"""
     if not os.path.exists(file_path):
         return
 
@@ -184,11 +223,10 @@ async def main():
 
     print("\n" + "═" * 65)
     print("  🔥 MARKETAPP TELEGRAM NFT DEAL HUNTER PRO 🔥")
-    print(f"  🎯 هدف: پیدا کردن ۵۰ گیفت با تخفیف ≥ ۵۰٪")
+    print(f"  🎯 هدف: پیدا کردن {CONFIG['TARGET_DEALS_COUNT']} گیفت با تخفیف ≥ ۵۰٪")
     print("═" * 65 + "\n")
 
     async with async_playwright() as p:
-        # انتخاب هوشمند مرورگر (سرور / لوکال)
         try:
             browser = await p.chromium.launch(headless=True)
         except Exception:
@@ -275,7 +313,9 @@ async def main():
                             seen_links.add(full_link)
                             deals_found.append(deal)
 
-                            rare_flag = f" | {rarity}" if rarity else ""
+                            rare_flag = (
+                                f" | 💎 {rarity}" if rarity else ""
+                            )
                             print(
                                 f"🎯 [{len(deals_found)}/{CONFIG['TARGET_DEALS_COUNT']}] "
                                 f"{deal['name']} ({deal['discount']}){rare_flag}"
@@ -302,6 +342,10 @@ async def main():
         await browser.close()
 
         # ذخیره فایل CSV
+        sorted_deals = sorted(
+            deals_found, key=lambda x: (x["rarity"] == "", -x["discount_num"])
+        )
+
         with open(
             CONFIG["EXPORT_CSV"], "w", encoding="utf-8-sig", newline=""
         ) as f:
@@ -318,21 +362,21 @@ async def main():
                     "لینک مارکت",
                 ]
             )
-            for idx, d in enumerate(deals_found, 1):
+            for idx, d in enumerate(sorted_deals, 1):
                 writer.writerow(
                     [
                         idx,
                         d["gift_title"],
                         d["number"],
                         d["discount"],
-                        d["rarity"],
+                        d["rarity"] or "معمولی",
                         d["price_per_day"],
                         d["tg_link"],
                         d["market_link"],
                     ]
                 )
 
-        # ارسال بسته کامل به تلگرام
+        # ارسال پیام‌ها به تلگرام
         send_telegram_package(deals_found)
 
 
