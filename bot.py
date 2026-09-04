@@ -25,9 +25,8 @@ CONFIG = {
     "EXPORT_CSV": "discounts.csv",
     "EXPORT_HTML": "index.html",
     "EXPORT_JSON": "discounts.json",
-    "EXPORT_SETTINGS": "settings.json",
-    https://kvdb.io/CGYrrEcyT5K4EK5P1gu34G/duck_settings
-    "CLOUD_DB_KEY": "duck_store_zanjani_db_v1",
+    # 🗄️ شناسه دیتابیس اختصاصی شما
+    "KVDB_BUCKET_ID": "CGYrrEcyT5K4EK5P1gu34G",
     "ADMIN_TELEGRAM_LINK": "https://t.me/Zanjani_a",
     "TELEGRAM_BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN", ""),
     "TELEGRAM_CHAT_ID": os.getenv("TELEGRAM_CHAT_ID", ""),
@@ -79,7 +78,7 @@ def generate_tg_nft_link(name: str, number: str) -> str:
 
 
 def generate_duck_store_html(deals: List[Dict[str, Any]]):
-    """تولید وب‌سایت فروشگاهی Duck Store متصل به دیتابیس ابری"""
+    """تولید وب‌سایت فروشگاهی Duck Store متصل به دیتابیس ابری شما"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     collections_map = {}
@@ -167,7 +166,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
     </style>
 </head>
 <body class="min-h-screen pb-28">
-    <!-- هدر سایت -->
     <header class="sticky top-0 z-40 bg-[#10131d]/95 backdrop-blur-md border-b border-gray-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -180,7 +178,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <!-- دکمه پنل ادمین -->
                 <button onclick="openAdminModal()" class="w-9 h-9 rounded-xl bg-[#1d2232] hover:bg-[#272e44] text-gray-300 hover:text-amber-400 flex items-center justify-center border border-gray-700/60 transition shadow-sm" title="پنل مدیریت قیمت‌ها">
                     <i class="fa-solid fa-gear text-sm"></i>
                 </button>
@@ -191,7 +188,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             </div>
         </div>
 
-        <!-- تب‌های ۳ گانه فروشگاه -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 py-2 border-t border-gray-800/40 overflow-x-auto">
             <button onclick="switchMainTab('gifts')" id="tabBtn-gifts" class="main-tab-btn active px-4 py-2 rounded-xl text-xs font-black bg-amber-500 text-black transition flex items-center gap-1.5 whitespace-nowrap">
                 <i class="fa-solid fa-gift"></i> اجاره گیفت
@@ -206,8 +202,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        
-        <!-- ================= تب اول: اجاره گیفت ================= -->
+        <!-- تب گیفت -->
         <section id="section-gifts" class="block">
             <div class="bg-[#141722] p-3 rounded-2xl border border-gray-800/80 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div class="relative w-full sm:w-80">
@@ -233,7 +228,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             <div id="dealsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
         </section>
 
-        <!-- ================= تب دوم: استارز تلگرام ================= -->
+        <!-- تب استارز -->
         <section id="section-stars" class="hidden max-w-xl mx-auto space-y-6">
             <div class="bg-[#141722] p-5 rounded-3xl border border-gray-800">
                 <h3 class="text-sm font-bold text-gray-200 mb-3 flex items-center gap-2">
@@ -252,7 +247,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
             <div class="bg-[#141722] p-5 rounded-3xl border border-gray-800 space-y-3">
                 <h3 class="text-xs font-bold text-gray-400 mb-2">یا انتخاب پکیج آماده:</h3>
-                
                 <div id="starsPackagesList" class="space-y-2.5"></div>
 
                 <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
@@ -268,7 +262,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             </div>
         </section>
 
-        <!-- ================= تب سوم: تلگرام پرمیوم ================= -->
+        <!-- تب پرمیوم -->
         <section id="section-premium" class="hidden max-w-xl mx-auto space-y-6">
             <div class="bg-[#141722] p-6 rounded-3xl border border-gray-800 space-y-4">
                 <div class="flex items-center justify-between">
@@ -318,7 +312,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         </div>
     </div>
 
-    <!-- ⚙️ پنل مدیریت ادمین آنلاین (متصل به Cloud DB) -->
+    <!-- ⚙️ پنل مدیریت ادمین آنلاین متصل به دیتابیس اختصاصی -->
     <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
         <div class="modal-bg w-full max-w-md rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
             <div class="px-6 py-4 flex items-center justify-between border-b border-gray-800">
@@ -331,20 +325,18 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                 <div class="w-7"></div>
             </div>
 
-            <!-- فرم ورود با پسورد -->
             <div id="adminLoginForm" class="p-6 space-y-4">
                 <p class="text-xs text-gray-400 text-center">رمز عبور ادمین را برای دسترسی به دیتابیس وارد کنید:</p>
                 <input type="password" id="adminPasswordInput" placeholder="رمز عبور ادمین..." 
                        class="w-full bg-[#1a1d26] border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-center text-white focus:outline-none focus:border-amber-500">
                 <button onclick="verifyAdminPassword()" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs rounded-xl transition">
-                    ورود به دیتابیس ابری
+                    ورود به دیتابیس
                 </button>
             </div>
 
-            <!-- داشبورد تنظیمات ادمین -->
             <div id="adminSettingsDashboard" class="p-5 space-y-4 overflow-y-auto flex-1 hidden text-xs">
-                <div class="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-[11px] text-blue-300">
-                    ☁️ <b>دیتابیس ابری متصل است:</b> با زدن دکمه ذخیره، قیمت‌ها و رمز عبور بلافاصله در کل جهان برای همه کاربران به‌روز می‌شود.
+                <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-300">
+                    🟢 <b>دیتابیس شخصی شما متصل است:</b> تغییرات قیمت و رمز عبور روی سرور اختصاصی شما ذخیره می‌شود.
                 </div>
 
                 <div>
@@ -378,7 +370,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                 </div>
 
                 <div class="pt-2 border-t border-gray-800">
-                    <label class="block text-rose-400 mb-1 font-bold">🔒 تغییر رمز عبور ادمین (جایگزینی در دیتابیس):</label>
+                    <label class="block text-rose-400 mb-1 font-bold">🔒 تغییر رمز عبور ادمین:</label>
                     <input type="password" id="admNewPass" placeholder="رمز عبور جدید..." class="w-full bg-[#1a1d26] border border-rose-500/40 rounded-xl px-3 py-2 text-white text-center">
                 </div>
 
@@ -433,8 +425,8 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         const DEALS = __DEALS_JSON__;
         const COLLECTIONS = __COLLECTIONS_JSON__;
         
-        // کلید دیتابیس ابری همگام
-        const CLOUD_DB_URL = "https://kvdb.io/SsfZ3yXQeAHz59vB42cW7w/__CLOUD_DB_KEY__";
+        // 🗄️ آدرس دیتابیس ابری اختصاصی شما
+        const CLOUD_DB_URL = "https://kvdb.io/__KVDB_BUCKET_ID__/duck_settings";
 
         const DEFAULT_SETTINGS = {
             ratePerStar: 1450,
@@ -459,7 +451,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         let favorites = JSON.parse(localStorage.getItem('duck_favs') || '[]');
         let cart = JSON.parse(localStorage.getItem('duck_cart') || '[]');
 
-        // 🌐 بارگذاری زنده قیمت‌ها و تنظیمات از دیتابیس ابری
         async function fetchCloudSettings() {
             try {
                 const res = await fetch(CLOUD_DB_URL);
@@ -470,7 +461,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                     }
                 }
             } catch (err) {
-                console.warn("استفاده از تنظیمات لوکال/پیش‌فرض به علت عدم اتصال:", err);
+                console.warn("استفاده از تنظیمات پیش‌فرض:", err);
             }
             updateUIWithLatestSettings();
         }
@@ -612,7 +603,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             window.open(`https://t.me/${SETTINGS.adminTg}?text=${msg}`, '_blank');
         }
 
-        // ================= پنل ادمین متصل به Cloud DB =================
+        // ================= پنل ادمین =================
         function openAdminModal() {
             triggerHaptic('light');
             document.getElementById('adminModal').classList.remove('hidden');
@@ -665,7 +656,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             if (newPass) newSettings.adminPass = newPass;
 
             try {
-                // ارسال مستقیم به دیتابیس ابری
                 const res = await fetch(CLOUD_DB_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -674,7 +664,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
                 if (res.ok) {
                     SETTINGS = newSettings;
-                    alert('✅ تغییرات با موفقیت در دیتابیس ابری ذخیره شد و برای همه کاربران اعمال گردید.');
+                    alert('✅ تغییرات با موفقیت در دیتابیس ذخیره و در کل جهان اعمال شد.');
                     closeAdminModal();
                     updateUIWithLatestSettings();
                 } else {
@@ -682,7 +672,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                 }
             } catch (err) {
                 SETTINGS = newSettings;
-                alert('⚠️ ذخیره به صورت محلی انجام شد (دیتابیس در دسترس نبود).');
+                alert('⚠️ ذخیره به صورت محلی انجام شد.');
                 closeAdminModal();
                 updateUIWithLatestSettings();
             } finally {
@@ -907,7 +897,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         .replace("__RARE_COUNT__", str(rare_count))
         .replace("__DEALS_JSON__", deals_json)
         .replace("__COLLECTIONS_JSON__", collections_json)
-        .replace("__CLOUD_DB_KEY__", CONFIG["CLOUD_DB_KEY"])
+        .replace("__KVDB_BUCKET_ID__", CONFIG["KVDB_BUCKET_ID"])
     )
 
     with open(CONFIG["EXPORT_HTML"], "w", encoding="utf-8") as f:
@@ -1200,7 +1190,7 @@ async def main():
                 )
 
         print(
-            f"\n⚡ فروشگاه Duck Store با دیتابیس ابری آماده شد!"
+            f"\n⚡ فروشگاه Duck Store با دیتابیس اختصاصی آماده شد!"
         )
         send_telegram_package(sorted_deals)
 
