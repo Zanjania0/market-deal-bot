@@ -78,7 +78,6 @@ def calculate_arbitrage(price_per_day: float, discount_val: float) -> dict:
     if discount_val >= 100:
         discount_val = 99.0
 
-    # تخمین قیمت اصلی کف بازار
     original_fair_price = price_per_day / (1.0 - (discount_val / 100.0))
     daily_profit = original_fair_price - price_per_day
     monthly_profit = daily_profit * 30.0
@@ -99,7 +98,13 @@ def generate_marketapp_html(deals: List[Dict[str, Any]]):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     deals_json = json.dumps(deals, ensure_ascii=False)
 
-    html_content = f"""<!DOCTYPE html>
+    max_discount = max([d.get("discount_num", 0) for d in deals] or [0])
+    rare_count = sum(1 for d in deals if d.get("rarity"))
+    max_roi = max(
+        [d.get("arbitrage", {}).get("roi_percent", 0) for d in deals] or [0]
+    )
+
+    html_template = """<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -109,21 +114,21 @@ def generate_marketapp_html(deals: List[Dict[str, Any]]):
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body {{
+        body {
             font-family: 'Vazirmatn', sans-serif;
             background-color: #0b0f19;
             color: #f3f4f6;
-        }}
-        .glass {{
+        }
+        .glass {
             background: rgba(17, 24, 39, 0.75);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-        }}
-        .card-hover:hover {{
+        }
+        .card-hover:hover {
             transform: translateY(-4px);
             border-color: rgba(59, 130, 246, 0.4);
             box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
-        }}
+        }
     </style>
 </head>
 <body class="min-h-screen pb-16">
@@ -144,7 +149,7 @@ def generate_marketapp_html(deals: List[Dict[str, Any]]):
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     بروزرسانی زنده
                 </span>
-                <p class="text-[11px] text-gray-400 mt-1">{timestamp}</p>
+                <p class="text-[11px] text-gray-400 mt-1">__TIMESTAMP__</p>
             </div>
         </div>
     </header>
@@ -154,19 +159,19 @@ def generate_marketapp_html(deals: List[Dict[str, Any]]):
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div class="glass p-5 rounded-2xl">
                 <p class="text-xs text-gray-400 mb-1">تعداد گیفت‌های تخفیف‌دار</p>
-                <p class="text-2xl font-black text-blue-400">{len(deals)} <span class="text-sm font-normal text-gray-400">مورد</span></p>
+                <p class="text-2xl font-black text-blue-400">__TOTAL_COUNT__ <span class="text-sm font-normal text-gray-400">مورد</span></p>
             </div>
             <div class="glass p-5 rounded-2xl">
                 <p class="text-xs text-gray-400 mb-1">بیشترین درصد تخفیف</p>
-                <p class="text-2xl font-black text-rose-400">-{max([d['discount_num'] for d in deals] or [0])}%</p>
+                <p class="text-2xl font-black text-rose-400">-__MAX_DISCOUNT__%</p>
             </div>
             <div class="glass p-5 rounded-2xl">
                 <p class="text-xs text-gray-400 mb-1">موارد کمیاب و خاص</p>
-                <p class="text-2xl font-black text-amber-400">{sum(1 for d in deals if d['rarity'])} <span class="text-sm font-normal text-gray-400">گیفت</span></p>
+                <p class="text-2xl font-black text-amber-400">__RARE_COUNT__ <span class="text-sm font-normal text-gray-400">گیفت</span></p>
             </div>
             <div class="glass p-5 rounded-2xl">
                 <p class="text-xs text-gray-400 mb-1">بیشترین بازدهی سود (ROI)</p>
-                <p class="text-2xl font-black text-emerald-400">+{max([d['arbitrage']['roi_percent'] for d in deals] or [0])}%</p>
+                <p class="text-2xl font-black text-emerald-400">+__MAX_ROI__%</p>
             </div>
         </div>
 
@@ -179,49 +184,47 @@ def generate_marketapp_html(deals: List[Dict[str, Any]]):
             </div>
 
             <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-                <button onclick="filterDeals('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white transition">همه ({len(deals)})</button>
+                <button onclick="filterDeals('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white transition">همه (__TOTAL_COUNT__)</button>
                 <button onclick="filterDeals('rare')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition">💎 فقط کمیاب‌ها</button>
                 <button onclick="filterDeals('mega')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition">🚨 بالای ۷۰٪ تخفیف</button>
                 <button onclick="filterDeals('roi')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition">💰 سود بالای ۲۰۰٪</button>
             </div>
         </div>
 
-        <!-- گرید کارت‌های گیفت (طراحی MarketApp) -->
+        <!-- گرید کارت‌های گیفت -->
         <div id="dealsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
     </main>
 
     <script>
-        const DEALS = {deals_json};
+        const DEALS = __DEALS_JSON__;
         let currentFilter = 'all';
 
-        function renderCards(items) {{
+        function renderCards(items) {
             const container = document.getElementById('dealsGrid');
-            if (items.length === 0) {{
-                container.innerHTML = `<div class="col-span-full py-16 text-center text-gray-400">موردی با این مشخصات یافت نشد.</div>`;
+            if (items.length === 0) {
+                container.innerHTML = '<div class="col-span-full py-16 text-center text-gray-400">موردی با این مشخصات یافت نشد.</div>';
                 return;
-            }}
+            }
 
-            container.innerHTML = items.map((deal, idx) => `
+            container.innerHTML = items.map((deal) => {
+                const rarityBadge = deal.rarity ? '<span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">' + deal.rarity + '</span>' : '';
+                return `
                 <div class="glass rounded-2xl overflow-hidden card-hover transition duration-200 border border-gray-800/80 flex flex-col justify-between">
                     <div>
-                        <!-- تصویر گیفت و برچسب‌ها -->
                         <div class="relative bg-gradient-to-b from-gray-800/50 to-transparent p-6 flex items-center justify-center min-h-[190px]">
                             <span class="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-xs font-extrabold bg-rose-500/90 text-white shadow-lg shadow-rose-500/30">
                                 ${deal.discount}
                             </span>
-                            ${deal.rarity ? `<span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">${deal.rarity}</span>` : ''}
-                            
+                            ${rarityBadge}
                             <img src="${deal.image_url}" alt="${deal.name}" class="w-28 h-28 object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] transform hover:scale-110 transition duration-300" onerror="this.src='https://marketapp.org/favicon.ico'">
                         </div>
 
-                        <!-- مشخصات گیفت -->
                         <div class="p-5">
                             <div class="flex items-center justify-between mb-2">
                                 <h3 class="font-bold text-base text-white truncate">${deal.name}</h3>
                                 <span class="text-xs text-gray-400 bg-gray-800/60 px-2 py-0.5 rounded-md">${deal.days_range} روز</span>
                             </div>
 
-                            <!-- باکس محاسبه‌گر سود و آربیتراژ -->
                             <div class="my-3 p-3 rounded-xl bg-gray-900/60 border border-gray-800">
                                 <div class="flex items-center justify-between text-xs mb-1.5">
                                     <span class="text-gray-400">قیمت اجاره:</span>
@@ -239,7 +242,6 @@ def generate_marketapp_html(deals: List[Dict[str, Any]]):
                         </div>
                     </div>
 
-                    <!-- دکمه‌های اکشن -->
                     <div class="px-5 pb-5 pt-0 grid grid-cols-2 gap-2">
                         <a href="${deal.market_link}" target="_blank" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition shadow-lg shadow-blue-600/20">
                             <i class="fa-solid fa-cart-shopping text-xs"></i> اجاره
@@ -249,38 +251,48 @@ def generate_marketapp_html(deals: List[Dict[str, Any]]):
                         </a>
                     </div>
                 </div>
-            `).join('');
-        }}
+                `;
+            }).join('');
+        }
 
-        function filterDeals(type) {{
+        function filterDeals(type) {
             currentFilter = type;
-            document.querySelectorAll('.filter-btn').forEach(btn => {{
+            document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-600', 'text-white');
                 btn.classList.add('bg-gray-800', 'text-gray-300');
-            }});
+            });
             event.target.classList.remove('bg-gray-800', 'text-gray-300');
             event.target.classList.add('bg-blue-600', 'text-white');
             applyFilters();
-        }}
+        }
 
-        function applyFilters() {{
+        function applyFilters() {
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
-            let filtered = DEALS.filter(d => {{
+            let filtered = DEALS.filter(d => {
                 const matchQuery = d.name.toLowerCase().includes(query) || d.number.includes(query);
                 if (!matchQuery) return false;
                 if (currentFilter === 'rare') return d.rarity !== '';
                 if (currentFilter === 'mega') return d.discount_num >= 70;
                 if (currentFilter === 'roi') return d.arbitrage.roi_percent >= 200;
                 return true;
-            }});
+            });
             renderCards(filtered);
-        }}
+        }
 
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         renderCards(DEALS);
     </script>
 </body>
 </html>"""
+
+    html_content = (
+        html_template.replace("__TIMESTAMP__", timestamp)
+        .replace("__TOTAL_COUNT__", str(len(deals)))
+        .replace("__MAX_DISCOUNT__", str(max_discount))
+        .replace("__RARE_COUNT__", str(rare_count))
+        .replace("__MAX_ROI__", str(max_roi))
+        .replace("__DEALS_JSON__", deals_json)
+    )
 
     with open(CONFIG["EXPORT_HTML"], "w", encoding="utf-8") as f:
         f.write(html_content)
@@ -302,7 +314,6 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
     max_discount = max(discounts) if discounts else 0
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # ساخت آدرس اختصاصی گیت‌هاب پیج
     gh_repo = CONFIG.get("GITHUB_REPOSITORY", "")
     pages_url = (
         f"https://{gh_repo.split('/')[0]}.github.io/{gh_repo.split('/')[1]}/"
@@ -419,7 +430,9 @@ async def main():
 
     print("\n" + "═" * 65)
     print("  🔥 MARKETAPP TELEGRAM NFT DEAL HUNTER PRO 🔥")
-    print(f"  🎯 هدف: استخراج ۱۰۰ گیفت تخفیف‌دار با محاسبه آربیتراژ و ساخت سایت")
+    print(
+        f"  🎯 هدف: استخراج ۱۰۰ گیفت تخفیف‌دار با محاسبه آربیتراژ و ساخت سایت"
+    )
     print("═" * 65 + "\n")
 
     async with async_playwright() as p:
@@ -503,7 +516,6 @@ async def main():
                             tg_link = generate_tg_nft_link(gift_name, item_num)
                             rarity = detect_rarity_badge(item_num)
 
-                            # استخراج تصویر گیفت
                             img_el = card.locator("img").first
                             img_src = (
                                 await img_el.get_attribute("src")
@@ -511,7 +523,6 @@ async def main():
                                 else "https://marketapp.org/favicon.ico"
                             )
 
-                            # محاسبه آربیتراژ
                             price_per_day = 0.01
                             arbitrage = calculate_arbitrage(
                                 price_per_day, discount_val
@@ -563,10 +574,10 @@ async def main():
 
         await browser.close()
 
-        # ۱. ساخت وب‌سایت شبیه MarketApp
+        # ساخت وب‌سایت
         generate_marketapp_html(deals_found)
 
-        # ۲. ذخیره فایل اکسل CSV
+        # ذخیره فایل CSV
         sorted_deals = sorted(
             deals_found, key=lambda x: (x["rarity"] == "", -x["discount_num"])
         )
@@ -606,7 +617,7 @@ async def main():
                     ]
                 )
 
-        print("\n✅ وب‌سایت و فایل‌های اکسل آماده شدند.")
+        print("\n✅ وب‌سایت و فایل‌های اکسل با موفقیت ایجاد شدند.")
         send_telegram_package(deals_found)
 
 
