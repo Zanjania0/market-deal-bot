@@ -26,7 +26,7 @@ CONFIG = {
     "EXPORT_HTML": "index.html",
     "EXPORT_JSON": "discounts.json",
     "EXPORT_SETTINGS": "settings.json",
-    # شناسه اختصاصی دیتابیس ابری شما (Cloud DB)
+    https://kvdb.io/CGYrrEcyT5K4EK5P1gu34G/duck_settings
     "CLOUD_DB_KEY": "duck_store_zanjani_db_v1",
     "ADMIN_TELEGRAM_LINK": "https://t.me/Zanjani_a",
     "TELEGRAM_BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN", ""),
