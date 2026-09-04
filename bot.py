@@ -1,4 +1,5 @@
 import asyncio
+from collections import defaultdict
 import csv
 from datetime import datetime
 import json
@@ -19,12 +20,12 @@ CONFIG = {
         "&subtab=gifts&view=grid&min_price=0.01&max_price=0.02"
     ),
     "MIN_DISCOUNT_PERCENT": 50.0,
-    "TARGET_DEALS_COUNT": 100,
+    "TARGET_DEALS_COUNT": 300,
     "BASE_DOMAIN": "https://marketapp.org",
     "EXPORT_CSV": "discounts.csv",
     "EXPORT_HTML": "index.html",
     "EXPORT_JSON": "discounts.json",
-    "ADMIN_TELEGRAM_LINK": "https://t.me/Zanjani_a",  # لینک پیوی شما برای دکمه اجاره
+    "ADMIN_TELEGRAM_LINK": "https://t.me/Zanjani_a",
     "TELEGRAM_BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN", ""),
     "TELEGRAM_CHAT_ID": os.getenv("TELEGRAM_CHAT_ID", ""),
     "GITHUB_REPOSITORY": os.getenv("GITHUB_REPOSITORY", ""),
@@ -75,9 +76,13 @@ def generate_tg_nft_link(name: str, number: str) -> str:
 
 
 def generate_duck_store_html(deals: List[Dict[str, Any]]):
-    """تولید وب‌سایت فروشگاهی Duck Store برای مشتریان"""
+    """تولید وب‌سایت فروشگاهی Duck Store با دسته‌بندی کالکشن‌ها"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # دسته‌بندی کالکشن‌ها برای ساخت دکمه‌های فیلتر
+    collections = sorted(list(set(d["gift_title"] for d in deals)))
     deals_json = json.dumps(deals, ensure_ascii=False)
+    collections_json = json.dumps(collections, ensure_ascii=False)
     rare_count = sum(1 for d in deals if d.get("rarity"))
 
     html_template = """<!DOCTYPE html>
@@ -111,7 +116,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
     </style>
 </head>
 <body class="min-h-screen pb-16">
-    <!-- هدر فروشگاه Duck Store -->
     <header class="sticky top-0 z-50 glass border-b border-gray-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -132,7 +136,6 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <!-- بنر و آمار خلاصه -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
             <div class="glass p-5 rounded-2xl flex items-center justify-between border-l-4 border-l-blue-500">
                 <div>
@@ -155,27 +158,46 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             </div>
         </div>
 
-        <!-- نوار فیلتر و جستجو -->
-        <div class="glass p-4 rounded-2xl mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="relative w-full md:w-80">
-                <i class="fa-solid fa-magnifying-glass absolute right-4 top-3.5 text-gray-400 text-sm"></i>
-                <input type="text" id="searchInput" placeholder="جستجوی نام گیفت یا شماره..." 
-                       class="w-full bg-gray-900/90 border border-gray-700/60 rounded-xl pr-11 pl-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition">
+        <!-- فیلتر و جستجو -->
+        <div class="glass p-4 rounded-2xl mb-8 space-y-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="relative w-full md:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute right-4 top-3.5 text-gray-400 text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="جستجوی نام گیفت یا شماره..." 
+                           class="w-full bg-gray-900/90 border border-gray-700/60 rounded-xl pr-11 pl-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition">
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    <button onclick="filterType('all')" class="type-btn active px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white transition">همه (__TOTAL_COUNT__)</button>
+                    <button onclick="filterType('rare')" class="type-btn px-4 py-2 rounded-xl text-xs font-bold bg-gray-800 text-gray-300 hover:bg-gray-700 transition">💎 فقط کمیاب‌ها</button>
+                </div>
             </div>
 
-            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-                <button onclick="filterDeals('all')" class="filter-btn active px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 text-white transition">همه گیفت‌ها (__TOTAL_COUNT__)</button>
-                <button onclick="filterDeals('rare')" class="filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-gray-800 text-gray-300 hover:bg-gray-700 transition">💎 فقط شماره‌های رند و کمیاب</button>
+            <!-- تب‌های فیلتر کالکشن‌ها -->
+            <div class="pt-3 border-t border-gray-800/80">
+                <p class="text-xs text-gray-400 mb-2 font-medium">🏷️ فیلتر بر اساس کالکشن:</p>
+                <div id="collectionsBar" class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto"></div>
             </div>
         </div>
 
-        <!-- گرید کارت‌های گیفت (طراحی تمیز برای مشتری) -->
         <div id="dealsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
     </main>
 
     <script>
         const DEALS = __DEALS_JSON__;
-        let currentFilter = 'all';
+        const COLLECTIONS = __COLLECTIONS_JSON__;
+        let selectedType = 'all';
+        let selectedCollection = 'all';
+
+        // ساخت دکمه‌های کالکشن
+        function initCollections() {
+            const bar = document.getElementById('collectionsBar');
+            bar.innerHTML = '<button onclick="filterCollection(\\'all\\')" class="col-btn active px-3 py-1 rounded-lg text-xs font-semibold bg-blue-600 text-white transition">همه کالکشن‌ها</button>' +
+                COLLECTIONS.map(c => {
+                    const count = DEALS.filter(d => d.gift_title === c).length;
+                    return `<button onclick="filterCollection('${c}')" class="col-btn px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800/80 text-gray-300 hover:bg-gray-700 transition border border-gray-700/40">${c} (${count})</button>`;
+                }).join('');
+        }
 
         function renderCards(items) {
             const container = document.getElementById('dealsGrid');
@@ -186,26 +208,24 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
             container.innerHTML = items.map((deal) => {
                 const rarityBadge = deal.rarity ? '<span class="absolute top-3 left-3 px-3 py-1 rounded-xl text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 backdrop-blur-md shadow-lg">' + deal.rarity + '</span>' : '';
-                const orderText = encodeURIComponent(`سلام، من متقاضی اجاره این گیفت از Duck Store هستم:\n🎁 ${deal.name}\n🔗 ${deal.tg_link}`);
+                const orderText = encodeURIComponent(`سلام، من متقاضی اجاره این گیفت از Duck Store هستم:\\n🎁 ${deal.name}\\n🔗 ${deal.tg_link}`);
                 const rentLink = `https://t.me/Zanjani_a?text=${orderText}`;
 
                 return `
                 <div class="glass rounded-3xl overflow-hidden card-hover border border-gray-800 flex flex-col justify-between p-3">
                     <div>
-                        <!-- قاب بزرگ و گرد تصویر گیفت -->
                         <div class="relative bg-gradient-to-b from-gray-800/60 to-gray-900/40 rounded-2xl p-6 flex items-center justify-center min-h-[210px] overflow-hidden">
                             ${rarityBadge}
+                            <span class="absolute bottom-2 right-3 px-2 py-0.5 rounded-md text-[10px] font-medium bg-gray-950/60 text-gray-400 border border-gray-800">${deal.gift_title}</span>
                             <img src="${deal.image_url}" alt="${deal.name}" class="w-36 h-36 object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] transform hover:scale-105 transition duration-300" onerror="this.src='https://marketapp.org/favicon.ico'">
                         </div>
 
-                        <!-- مشخصات -->
                         <div class="p-4">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="font-black text-lg text-white truncate">${deal.name}</h3>
                                 <span class="text-xs text-gray-400 bg-gray-800 px-2.5 py-1 rounded-lg border border-gray-700/50">${deal.days_range} روزه</span>
                             </div>
 
-                            <!-- باکس قیمت ماهانه -->
                             <div class="my-2 p-3.5 rounded-2xl bg-gray-900/80 border border-gray-800/90 flex items-center justify-between">
                                 <span class="text-xs text-gray-400 font-medium">هزینه اجاره:</span>
                                 <div class="text-left">
@@ -216,13 +236,12 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                         </div>
                     </div>
 
-                    <!-- دکمه‌های اقدام -->
                     <div class="p-3 pt-0 grid grid-cols-2 gap-2">
                         <a href="${rentLink}" target="_blank" class="flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xs font-black transition shadow-lg shadow-blue-500/25">
                             <i class="fa-solid fa-bolt text-xs"></i> اجاره
                         </a>
                         <a href="${deal.tg_link}" target="_blank" class="flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-bold transition border border-gray-700/40">
-                            <i class="fa-brands fa-telegram text-xs"></i> تلگرام
+                            <i class="fa-solid fa-eye text-xs"></i> نمایش
                         </a>
                     </div>
                 </div>
@@ -230,9 +249,9 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             }).join('');
         }
 
-        function filterDeals(type) {
-            currentFilter = type;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
+        function filterType(type) {
+            selectedType = type;
+            document.querySelectorAll('.type-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-600', 'text-white');
                 btn.classList.add('bg-gray-800', 'text-gray-300');
             });
@@ -241,18 +260,31 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             applyFilters();
         }
 
+        function filterCollection(col) {
+            selectedCollection = col;
+            document.querySelectorAll('.col-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-800/80', 'text-gray-300');
+            });
+            event.target.classList.remove('bg-gray-800/80', 'text-gray-300');
+            event.target.classList.add('bg-blue-600', 'text-white');
+            applyFilters();
+        }
+
         function applyFilters() {
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             let filtered = DEALS.filter(d => {
-                const matchQuery = d.name.toLowerCase().includes(query) || d.number.includes(query);
+                const matchQuery = d.name.toLowerCase().includes(query) || d.number.includes(query) || d.gift_title.toLowerCase().includes(query);
                 if (!matchQuery) return false;
-                if (currentFilter === 'rare') return d.rarity !== '';
+                if (selectedType === 'rare' && d.rarity === '') return false;
+                if (selectedCollection !== 'all' && d.gift_title !== selectedCollection) return false;
                 return true;
             });
             renderCards(filtered);
         }
 
         document.getElementById('searchInput').addEventListener('input', applyFilters);
+        initCollections();
         renderCards(DEALS);
     </script>
 </body>
@@ -263,6 +295,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
         .replace("__TOTAL_COUNT__", str(len(deals)))
         .replace("__RARE_COUNT__", str(rare_count))
         .replace("__DEALS_JSON__", deals_json)
+        .replace("__COLLECTIONS_JSON__", collections_json)
     )
 
     with open(CONFIG["EXPORT_HTML"], "w", encoding="utf-8") as f:
@@ -273,12 +306,12 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
 
 
 def send_telegram_package(deals: List[Dict[str, Any]]):
+    """ارسال گزارش تلگرام دسته‌بندی‌شده بر اساس کالکشن"""
     token = CONFIG.get("TELEGRAM_BOT_TOKEN", "").strip()
     chat_id = CONFIG.get("TELEGRAM_CHAT_ID", "").strip()
     if not token or not chat_id:
         return
 
-    rare_deals = [d for d in deals if d["rarity"]]
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     gh_repo = CONFIG.get("GITHUB_REPOSITORY", "")
@@ -288,30 +321,45 @@ def send_telegram_package(deals: List[Dict[str, Any]]):
         else "https://zanjania0.github.io/market-deal-bot/"
     )
 
+    # گروه‌بندی آیتم‌ها بر اساس کالکشن
+    grouped_deals = defaultdict(list)
+    for d in deals:
+        grouped_deals[d["gift_title"]].append(d)
+
+    rare_count = sum(1 for d in deals if d["rarity"])
+
     full_text = (
-        f"🦆 <b>بروزرسانی فروشگاه Duck Store</b>\n"
+        f"🦆 <b>گزارش موجودی جدید ۳۰۰ گیفت در Duck Store</b>\n"
         f"📅 <i>{timestamp}</i>\n\n"
-        f"🌐 <b>لینک مشاهده ویترین فروشگاه:</b>\n👉 <a href='{pages_url}'>{pages_url}</a>\n"
+        f"🌐 <b>ویترین آنلاین فروشگاه:</b>\n👉 <a href='{pages_url}'>{pages_url}</a>\n"
         f"━━━━━━━━━━━━━━━━━━━━\n"
-        f"🎯 <b>تعداد کل گیفت‌ها:</b> {len(deals)} مورد\n"
-        f"💎 <b>موارد کمیاب/خاص:</b> {len(rare_deals)} مورد\n"
+        f"🎯 <b>تعداد کل:</b> {len(deals)} مورد ({len(grouped_deals)} کالکشن)\n"
+        f"💎 <b>موارد کمیاب:</b> {rare_count} مورد\n"
         f"━━━━━━━━━━━━━━━━━━━━\n\n"
     )
 
-    links_text = (
-        f"📋 <b>━━━ لیست لینک‌های تلگرام ({len(deals)} مورد) ━━━</b>\n\n"
-    )
-    for idx, d in enumerate(deals, 1):
-        links_text += f"{idx}. {d['tg_link']}\n"
+    # چینش پیام به تفکیک کالکشن‌ها
+    item_counter = 1
+    for collection_name in sorted(grouped_deals.keys()):
+        items = grouped_deals[collection_name]
+        full_text += f"📦 <b>━━━ کالکشن {collection_name} ({len(items)} مورد) ━━━</b>\n\n"
+
+        for d in items:
+            rarity_badge = f"\n   🏆 <b>{d['rarity']}</b>" if d["rarity"] else ""
+            full_text += (
+                f"<b>{item_counter}. {d['name']}</b>{rarity_badge}\n"
+                f"   🏷️ تخفیف: <code>{d['discount']}</code> | 💰 {d['price_per_day']} TON/روز\n"
+                f"   📱 <a href='{d['tg_link']}'>مشاهده در تلگرام</a>\n"
+                f"   🛒 <a href='{d['market_link']}'>خرید/اجاره در MarketApp</a>\n\n"
+            )
+            item_counter += 1
 
     send_chunks_to_telegram(full_text, token, chat_id)
-    time.sleep(1)
-    send_chunks_to_telegram(links_text, token, chat_id)
     send_telegram_csv_attachment(
         CONFIG["EXPORT_CSV"],
         token,
         chat_id,
-        f"📊 فایل اکسل موجودی Duck Store ({timestamp})",
+        f"📊 فایل اکسل ۳۰۰ گیفت مرتب‌شده بر اساس کالکشن ({timestamp})",
     )
 
 
@@ -342,7 +390,7 @@ def send_chunks_to_telegram(text: str, token: str, chat_id: str):
             req = urllib.request.Request(url, data=payload)
             with urllib.request.urlopen(req, timeout=15):
                 pass
-            time.sleep(0.4)
+            time.sleep(0.5)
         except Exception:
             pass
 
@@ -379,7 +427,7 @@ def send_telegram_csv_attachment(
 
 
 # ==========================================
-# 🚀 اجرای اصلی اسکرپر
+# 🚀 موتور اصلی اسکرپر
 # ==========================================
 async def main():
     deals_found: List[Dict[str, Any]] = []
@@ -387,7 +435,9 @@ async def main():
 
     print("\n" + "═" * 65)
     print("  🦆 DUCK STORE GIFT CATALOG GENERATOR 🦆")
-    print(f"  🎯 هدف: استخراج ۱۰۰ گیفت برای ویترین فروشگاه")
+    print(
+        f"  🎯 هدف: استخراج {CONFIG['TARGET_DEALS_COUNT']} گیفت با تفکیک کالکشن"
+    )
     print("═" * 65 + "\n")
 
     async with async_playwright() as p:
@@ -482,6 +532,9 @@ async def main():
                                 "name": f"{gift_name} #{item_num}",
                                 "gift_title": gift_name,
                                 "number": item_num,
+                                "discount": f"-{discount_val}%",
+                                "discount_num": discount_val,
+                                "price_per_day": "0.01",
                                 "days_range": days_range,
                                 "tg_link": tg_link,
                                 "market_link": full_link,
@@ -519,30 +572,48 @@ async def main():
 
         await browser.close()
 
-        # ساخت وب‌سایت فروشگاهی Duck Store
-        generate_duck_store_html(deals_found)
+        # مرتب‌سازی کل لیست بر اساس نام کالکشن و سپس شماره
+        sorted_deals = sorted(
+            deals_found,
+            key=lambda x: (x["gift_title"], int(re.sub(r"\D", "", x["number"]))),
+        )
 
-        # ذخیره فایل CSV
+        # ساخت صفحه سایت با دسته‌بندی
+        generate_duck_store_html(sorted_deals)
+
+        # ذخیره فایل CSV مرتب‌شده بر اساس کالکشن
         with open(
             CONFIG["EXPORT_CSV"], "w", encoding="utf-8-sig", newline=""
         ) as f:
             writer = csv.writer(f)
             writer.writerow(
-                ["ردیف", "نام گیفت", "شماره", "کمیابی", "لینک تلگرام"]
+                [
+                    "ردیف",
+                    "کالکشن",
+                    "نام گیفت",
+                    "شماره",
+                    "تخفیف",
+                    "کمیابی",
+                    "لینک تلگرام",
+                    "لینک MarketApp",
+                ]
             )
-            for idx, d in enumerate(deals_found, 1):
+            for idx, d in enumerate(sorted_deals, 1):
                 writer.writerow(
                     [
                         idx,
                         d["gift_title"],
+                        d["name"],
                         d["number"],
+                        d["discount"],
                         d["rarity"] or "معمولی",
                         d["tg_link"],
+                        d["market_link"],
                     ]
                 )
 
-        print("\n✅ ویترین فروشگاه Duck Store با موفقیت آپدیت شد.")
-        send_telegram_package(deals_found)
+        print("\n✅ گیفت‌ها با موفقیت بر اساس کالکشن مرتب‌سازی و ذخیره شدند.")
+        send_telegram_package(sorted_deals)
 
 
 if __name__ == "__main__":
