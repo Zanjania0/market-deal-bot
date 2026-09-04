@@ -76,7 +76,7 @@ def generate_tg_nft_link(name: str, number: str) -> str:
 
 
 def generate_duck_store_html(deals: List[Dict[str, Any]]):
-    """تولید وب‌سایت فروشگاهی Duck Store با استایل دقیق StarsDex"""
+    """تولید وب‌سایت فروشگاهی Duck Store ساده و تمیز"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     collections_map = {}
@@ -154,7 +154,7 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
     </style>
 </head>
 <body class="min-h-screen pb-16">
-    <!-- هدر بالای صفحه به سبک StarsDex -->
+    <!-- هدر بالای صفحه -->
     <header class="sticky top-0 z-40 bg-[#10131d]/90 backdrop-blur-md border-b border-gray-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -191,11 +191,11 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
             </div>
         </div>
 
-        <!-- گرید کارت‌ها دقیقاً مطابق تصویر StarsDex -->
+        <!-- گرید کارت‌ها -->
         <div id="dealsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
     </main>
 
-    <!-- مودال انتخاب کالکشن StarsDex -->
+    <!-- مودال انتخاب کالکشن -->
     <div id="collectionModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
         <div class="modal-bg w-full max-w-md rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh]">
             <div class="px-6 py-4 flex items-center justify-between border-b border-gray-800/80">
@@ -291,11 +291,8 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                 return `
                 <div class="stars-card overflow-hidden flex flex-col justify-between">
                     <div>
-                        <!-- باکس عکس کارت دقیقاً مثل StarsDex -->
+                        <!-- باکس عکس کارت (بدون برچسب درصد تخفیف) -->
                         <div class="relative w-full h-48 bg-gradient-to-b from-[#22283a] to-[#161a26] flex items-center justify-center overflow-hidden border-b border-gray-800/60 rounded-t-3xl">
-                            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-lg text-[11px] font-black bg-rose-500 text-white shadow-md">
-                                ${deal.discount}
-                            </span>
                             ${rarityBadge}
                             <img src="${deal.image_url}" alt="${deal.name}" class="w-32 h-32 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] transform hover:scale-108 transition duration-300" onerror="this.src='https://marketapp.org/favicon.ico'">
                         </div>
@@ -303,20 +300,17 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                         <!-- بدنه کارت -->
                         <div class="p-4">
                             <!-- نام گیفت -->
-                            <h3 class="font-bold text-sm text-center text-white mb-2.5 truncate">${deal.name}</h3>
+                            <h3 class="font-bold text-sm text-center text-white mb-3 truncate">${deal.name}</h3>
 
-                            <!-- بج‌های قیمت استارزدکس (قیمت ماهانه طلایی) -->
-                            <div class="flex flex-col items-center gap-1.5 mb-3.5">
-                                <span class="price-badge-gold px-3.5 py-1 rounded-full text-xs font-black shadow-sm">
+                            <!-- بج قیمت ماهانه (بدون بخش TON) -->
+                            <div class="flex flex-col items-center mb-4">
+                                <span class="price-badge-gold px-4 py-1.5 rounded-full text-xs font-black shadow-sm">
                                     160,000 تومان / ماه
-                                </span>
-                                <span class="px-3 py-0.5 rounded-full text-[10px] font-bold bg-[#0d1017] text-gray-400 border border-gray-800">
-                                    TON ${deal.price_per_day} / روز
                                 </span>
                             </div>
 
-                            <!-- ردیف مشخصات به سبک StarsDex -->
-                            <div class="space-y-1.5 text-xs text-gray-400 bg-[#0d1017]/80 p-2.5 rounded-xl border border-gray-800/60">
+                            <!-- ردیف مشخصات (بدون وضعیت تحویل آنی) -->
+                            <div class="space-y-2 text-xs text-gray-400 bg-[#0d1017]/80 p-3 rounded-xl border border-gray-800/60">
                                 <div class="flex justify-between items-center text-[11px]">
                                     <span class="text-gray-500">کالکشن:</span>
                                     <span class="font-semibold text-gray-200">${deal.gift_title}</span>
@@ -325,15 +319,11 @@ def generate_duck_store_html(deals: List[Dict[str, Any]]):
                                     <span class="text-gray-500">مدت اجاره:</span>
                                     <span class="font-semibold text-gray-200">${deal.days_range} روز</span>
                                 </div>
-                                <div class="flex justify-between items-center text-[11px]">
-                                    <span class="text-gray-500">وضعیت:</span>
-                                    <span class="font-semibold text-emerald-400">تحویل آنی</span>
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- دکمه‌ها (فقط مشاهده و اجاره - بدون سبد) -->
+                    <!-- دکمه‌ها -->
                     <div class="p-4 pt-0 grid grid-cols-2 gap-2">
                         <a href="${deal.tg_link}" target="_blank" class="py-2.5 px-3 rounded-xl bg-[#1e2330] hover:bg-[#282f42] text-gray-300 text-xs font-bold text-center transition border border-gray-700/50 flex items-center justify-center gap-1">
                             مشاهده
@@ -674,7 +664,7 @@ async def main():
                     ]
                 )
 
-        print("\n⚡ ویترین StarsDex با موفقیت آپدیت شد!")
+        print(f"\n⚡ ۲۰۰ گیفت تمیز و مشتری‌پسند با موفقیت آماده شدند!")
         send_telegram_package(sorted_deals)
 
 
