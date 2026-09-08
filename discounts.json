@@ -13,6 +13,19 @@
     "rarity": ""
   },
   {
+    "name": "Berry Box #215",
+    "gift_title": "Berry Box",
+    "number": "215",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/BerryBox-215",
+    "market_link": "https://marketapp.org/nft/EQC7Yz1ue-tea7vPWFSSJqPkkCdeuj4D4mdTbwRNForOnBDv/?to=rent",
+    "image_url": "https://i2.anton.market/fIpdqIb8PCoHSY7LTuptsVHmX_8BibwI8y2p9zZHg4I/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUI0eDNzVDFEVmRPRHpheTNILTRWSklkT29vUzUta1RneUtjWU1aV29nUE9zaXEvbi9jZTEyOWQ2NjJjYzk5NzIwMzNmN2FkZjQ5N2Y4MmMzNS53ZWJw",
+    "rarity": "💎 زیر ۱۰۰۰ (#215)"
+  },
+  {
     "name": "Berry Box #27995",
     "gift_title": "Berry Box",
     "number": "27995",
@@ -1219,19 +1232,6 @@
     "tg_link": "https://t.me/nft/LibertyFigure-219258",
     "market_link": "https://marketapp.org/nft/EQBLUiDmlomBl3E6wJN_SC8DGIblXa1PYzdr5xbTBXU6Zj3i/?to=rent",
     "image_url": "https://i2.anton.market/EiuRysmfwAVN15DVQEp-d29fyuqntgxtSCnbrs4F2o0/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJFbmdXbGR6ZXY5b3F6Y3R1NTlHbzlhZlg4SEY4SGtzWjlwSjd4MWJSSlhzYzcvbi84MzJkN2M4ZWZkNjQyN2ZiMjQzMDYxMGRlZTUyZWU2Yy53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Liberty Figure #219260",
-    "gift_title": "Liberty Figure",
-    "number": "219260",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/LibertyFigure-219260",
-    "market_link": "https://marketapp.org/nft/EQBExwVypjVZZO94a9yiOWI3Xje_ke-hjLI8WttmCybYwzbO/?to=rent",
-    "image_url": "https://i2.anton.market/lJV3bnp8miowjtfS4wtemiPIcwQ2KSAAiKgAROtUXI0/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJFbmdXbGR6ZXY5b3F6Y3R1NTlHbzlhZlg4SEY4SGtzWjlwSjd4MWJSSlhzYzcvbi80OGVlYTA2NmU2YjcwZmE0NGYzOWRmYTBjYzk1ZWZjZi53ZWJw",
     "rarity": ""
   },
   {
