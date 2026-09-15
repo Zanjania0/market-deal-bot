@@ -1105,19 +1105,6 @@
     "rarity": ""
   },
   {
-    "name": "Jester Hat #25454",
-    "gift_title": "Jester Hat",
-    "number": "25454",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/JesterHat-25454",
-    "market_link": "https://marketapp.org/nft/EQAlCCsQbFRNkLAgGUXzG6F607TCqEID5yrMbxx84I13j6-N/?to=rent",
-    "image_url": "https://i2.anton.market/SoWl85L3n82ESwcs3U_OSKYgSqjbEfNmLYcHrFMh-1M/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUNCS19KQkFTQUE1WFZ6MUQxN1BuLS1rUWFNV20wYjl3UmVWdHNFZFJPNFRneTkvbi85ZDIwNDU5MmI1OWY1ODQ2ODIyNTc4NTJhYTJhZmNhMC53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "Joyful Bundle #13014",
     "gift_title": "Joyful Bundle",
     "number": "13014",
@@ -2376,6 +2363,19 @@
     "tg_link": "https://t.me/nft/TimelessBook-37269",
     "market_link": "https://marketapp.org/nft/EQB6YIUUiDqAW9AZwSIBtgSyHQ5-jbLwegR9I8hdIrVQXkY0/?to=rent",
     "image_url": "https://i2.anton.market/fXiPd5CYV-nU4PAg0DRuRWc2Y4lWbeGOy604LVmK8hM/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUMyMTJkanJxMGdnbFFYaThNU0ZYMWJjdzRMSHczRXM2MmxLdnQxbFp6enNZdUYvbi8xZDI1NDNkYmY3NjRkZmM1ZGI0ZmU3NjgzNGQxOWUyZC53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Timeless Book #41318",
+    "gift_title": "Timeless Book",
+    "number": "41318",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/TimelessBook-41318",
+    "market_link": "https://marketapp.org/nft/EQD3uI2BJZIuy6n_vuQe65emkRzdOfmUOvPbuyG5r6BNreRT/?to=rent",
+    "image_url": "https://i2.anton.market/yQCCvapLEQzueqd4tF6g6DyZlge7zgZZNqi4_yYujfA/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUMyMTJkanJxMGdnbFFYaThNU0ZYMWJjdzRMSHczRXM2MmxLdnQxbFp6enNZdUYvbi8xYWUyOTE0YTViYzE5ZTY2ZWY3OWI3ZjFjMDIwZTFkYy53ZWJw",
     "rarity": ""
   },
   {
