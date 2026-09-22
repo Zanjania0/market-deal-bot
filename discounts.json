@@ -52,6 +52,19 @@
     "rarity": ""
   },
   {
+    "name": "Big Year #35806",
+    "gift_title": "Big Year",
+    "number": "35806",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/BigYear-35806",
+    "market_link": "https://marketapp.org/nft/EQBfRchuYLB-BCF9zPUo3D4B_9iEevTFHi6-JrfIvlTQ_5yv/?to=rent",
+    "image_url": "https://i2.anton.market/fABMm6LDBNjo_hRfNlH5o1KV45-ANhpUx5WQPO0vqIE/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUR4LVNxUUVoUDlSemZpMmNxZGVoVFZVdlFiQXJzVXoxWDd0LXVsOElpS1pwWWIvbi9lM2ViNzAzZGNjMDBkZGVhNmYyMzJlNGZmMzMwYjM0NC53ZWJw",
+    "rarity": ""
+  },
+  {
     "name": "Bunny Muffin #41613",
     "gift_title": "Bunny Muffin",
     "number": "41613",
@@ -221,19 +234,6 @@
     "rarity": ""
   },
   {
-    "name": "Crystal Ball #6505",
-    "gift_title": "Crystal Ball",
-    "number": "6505",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 50",
-    "tg_link": "https://t.me/nft/CrystalBall-6505",
-    "market_link": "https://marketapp.org/nft/EQABveT9kMz1Tm97Cp3OGX_lajEm5JSBKk2G4kKqw8kBP_f_/?to=rent",
-    "image_url": "https://i2.anton.market/SrVssLfieq0_WNvotjZWpfEdEpJy53TQ3XaovTRMklY/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUF0Z2JoU0hPcVR4anVSTExPQWFiNlQ2NkZQY1FXVE5kX0RUM1ZnQ0cxLXRISncvbi9hNDJlNzg5Yzk1MzBjM2U1NjBmZGE5MjJlZWQ5ZWM0Ni53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "Cupid Charm #7093",
     "gift_title": "Cupid Charm",
     "number": "7093",
@@ -390,19 +390,6 @@
     "rarity": ""
   },
   {
-    "name": "Hanging Star #12639",
-    "gift_title": "Hanging Star",
-    "number": "12639",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/HangingStar-12639",
-    "market_link": "https://marketapp.org/nft/EQB_2Xa8HacfNfGAEVEIJWAwj4oZA360E57Ovb-9WPGQqnq6/?to=rent",
-    "image_url": "https://i2.anton.market/Ye-JMWSZbs16T4KGwIHOPD_Pq-Xff2eI6RE4IuGTZSw/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUI4ekx6RU9GUUszcVR5TVlnUEQ4QnV6bU53Ymxub3VxYUI4MFBXLXMyRTduY3Qvbi81ZTNhNjhiN2Q1NTcyYzE1NDQ2NDIxYjYyYzkxNmU3ZS53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "Hanging Star #17541",
     "gift_title": "Hanging Star",
     "number": "17541",
@@ -479,6 +466,19 @@
     "market_link": "https://marketapp.org/nft/EQDNZrN2QToMP3o_SlhJwtD_lvr96VdO4s7EfdRL85-exTSc/?to=rent",
     "image_url": "https://i2.anton.market/6ibIsjeramB_PFWNjRLZvEJJMq5BwYXcTGux-eTVfZI/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJVdnNrRXZtV2RwX1Y2SFgtMlR5ZnA0bUZTek16ZGc5VGFVejZ6S1Z6Nk92M2Yvbi9mYTQwMjliYTgyODNkMjE1ZmEzOTUwZmZjNjFiNTQxNy53ZWJw",
     "rarity": ""
+  },
+  {
+    "name": "Ice Cream #6776",
+    "gift_title": "Ice Cream",
+    "number": "6776",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/IceCream-6776",
+    "market_link": "https://marketapp.org/nft/EQC9vzTmedw2MxrNFcjLliSIEaFEemNZBsyrUngXaNNPbi4r/?to=rent",
+    "image_url": "https://i2.anton.market/PctRRwpn5_YomGdPE4t_14ZMpGHuxrDqQtRXTgWL4YQ/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJVdnNrRXZtV2RwX1Y2SFgtMlR5ZnA0bUZTek16ZGc5VGFVejZ6S1Z6Nk92M2Yvbi9hMjM0YWI5ZWE5NTc4NGQwMGQ3MzFkOWJjZTAyMTEyNi53ZWJw",
+    "rarity": "🔁 متقارن (#6776)"
   },
   {
     "name": "Ice Cream #7717",
@@ -741,19 +741,6 @@
     "rarity": ""
   },
   {
-    "name": "Ice Cream #248289",
-    "gift_title": "Ice Cream",
-    "number": "248289",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/IceCream-248289",
-    "market_link": "https://marketapp.org/nft/EQAfVYVEqNXzx9lt-FXDsfAWIAEoitNys2PtCl1T7YR796Su/?to=rent",
-    "image_url": "https://i2.anton.market/n6-hZtuOqz6QKALfJFZ3zzAn1wqkfMOx1l21WkKefg0/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJVdnNrRXZtV2RwX1Y2SFgtMlR5ZnA0bUZTek16ZGc5VGFVejZ6S1Z6Nk92M2Yvbi80MTk3MTJiZGUwYWEzNTg2NmU5MWI2YmZmNjM5YTU5ZS53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "Ice Cream #261144",
     "gift_title": "Ice Cream",
     "number": "261144",
@@ -897,19 +884,6 @@
     "rarity": ""
   },
   {
-    "name": "Ice Cream #294379",
-    "gift_title": "Ice Cream",
-    "number": "294379",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/IceCream-294379",
-    "market_link": "https://marketapp.org/nft/EQBQY_luCSjF9cVvbtocQQJBx7SS0S0YFJalz2P4sxeib0Qb/?to=rent",
-    "image_url": "https://i2.anton.market/if_e4PqeyQ_sMSS0o_edBnt6_jKgDTn5rx-zZTSkMsQ/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJVdnNrRXZtV2RwX1Y2SFgtMlR5ZnA0bUZTek16ZGc5VGFVejZ6S1Z6Nk92M2Yvbi9mNDk0MTExZGM2NTNkYWExOTA2OTEyNDY4MzNhOTU3Ni53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "Ice Cream #294385",
     "gift_title": "Ice Cream",
     "number": "294385",
@@ -946,6 +920,19 @@
     "tg_link": "https://t.me/nft/IceCream-294408",
     "market_link": "https://marketapp.org/nft/EQDEAwgG1vHOeYZ8K3USd1rPIe5gl9cahOmu7-ayaIZowhgv/?to=rent",
     "image_url": "https://i2.anton.market/E5hyxIbd80MRKVNHaVMppaEi_G0TGovUAd2UfDbI8_o/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJVdnNrRXZtV2RwX1Y2SFgtMlR5ZnA0bUZTek16ZGc5VGFVejZ6S1Z6Nk92M2Yvbi9mY2E1N2ViOWIzNTA2NzI5NDM2MDE3MGMyNThiZjRmMy53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Ice Cream #294410",
+    "gift_title": "Ice Cream",
+    "number": "294410",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 50",
+    "tg_link": "https://t.me/nft/IceCream-294410",
+    "market_link": "https://marketapp.org/nft/EQC-zsLobBV4JFUnsL0KKVLXo1L13TXQEAGlE181w3-fAJx7/?to=rent",
+    "image_url": "https://i2.anton.market/U4sbZeVtBvFtCM5UizL0hYqd6XnpLikg1vM8euPvjlY/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJVdnNrRXZtV2RwX1Y2SFgtMlR5ZnA0bUZTek16ZGc5VGFVejZ6S1Z6Nk92M2Yvbi83YmRlYzgzYjBmYjViNTdkNjhlOTUwNDM2ZTM2ZDk4YS53ZWJw",
     "rarity": ""
   },
   {
@@ -998,6 +985,32 @@
     "tg_link": "https://t.me/nft/InputKey-61575",
     "market_link": "https://marketapp.org/nft/EQAPqFcWbpzcVoew5m8ngF_u20kQQDZifyBGz-Qv213rVcDx/?to=rent",
     "image_url": "https://i2.anton.market/lPCTRfoDO_2VDWxnHOrMFdvX_nRFjSrKnoLFJi1p5gc/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJTSUlkN3NNbWxxTjhvQkdhTU50VWV1YUxlU1FQVVIxQnlNd3BuZldMM2hoWnEvbi83ZjExMGEzYzZhZmRiYThkNzhiMWY1ZDFlNzE3ZmQxZS53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Instant Ramen #143914",
+    "gift_title": "Instant Ramen",
+    "number": "143914",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 34",
+    "tg_link": "https://t.me/nft/InstantRamen-143914",
+    "market_link": "https://marketapp.org/nft/EQDzlfG5d2jHVgRzTILIk-4bfO-wAiIzKCHT9A9MtCBvHXmk/?to=rent",
+    "image_url": "https://i2.anton.market/N0o5KAZJwKEtmxHopexFIs8IjTGaq8vFK_2jysHFZ1k/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJJajB1Ri1xSUFTcXY2cUl2Y1RpZjJ3S1NkdDRXUWM0bWNvQnl3TnA1R250dUcvbi8zYTA3MDk2YTFhYzBhNzZlYmE1ZjMzYzZmNTI3MTQ3My53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Instant Ramen #174258",
+    "gift_title": "Instant Ramen",
+    "number": "174258",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 34",
+    "tg_link": "https://t.me/nft/InstantRamen-174258",
+    "market_link": "https://marketapp.org/nft/EQCb7IuZMzm84-pcpBBYRjTUHjhkWpt1zFD6ENaZX3G96dQ4/?to=rent",
+    "image_url": "https://i2.anton.market/Q4BTfDPn_9mAFZM1eZSx1AImSnrXNb7zX1_eG1Yx86Y/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJJajB1Ri1xSUFTcXY2cUl2Y1RpZjJ3S1NkdDRXUWM0bWNvQnl3TnA1R250dUcvbi8xZjk4MzVlYjU4NDlhOGEyNjFhODY3YTA3NTc5NmZmNi53ZWJw",
     "rarity": ""
   },
   {
@@ -1287,6 +1300,19 @@
     "rarity": ""
   },
   {
+    "name": "Liberty Figure #245556",
+    "gift_title": "Liberty Figure",
+    "number": "245556",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/LibertyFigure-245556",
+    "market_link": "https://marketapp.org/nft/EQAcHGaStL8ie_in6ee81K2vIsbDgyfcYsURr6_ytaKxJwY-/?to=rent",
+    "image_url": "https://i2.anton.market/v_OBlYnnkQYIh6P-pWonT1J4QU3Oteu5-Fk4CdIqnv8/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJFbmdXbGR6ZXY5b3F6Y3R1NTlHbzlhZlg4SEY4SGtzWjlwSjd4MWJSSlhzYzcvbi9iOWQ2NGVlOGM0NjdiYTRjZmI2MjI5YjBhNGJjNWVlYS53ZWJw",
+    "rarity": ""
+  },
+  {
     "name": "Liberty Figure #245557",
     "gift_title": "Liberty Figure",
     "number": "245557",
@@ -1560,6 +1586,19 @@
     "rarity": ""
   },
   {
+    "name": "Mood Pack #43305",
+    "gift_title": "Mood Pack",
+    "number": "43305",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 50",
+    "tg_link": "https://t.me/nft/MoodPack-43305",
+    "market_link": "https://marketapp.org/nft/EQDbyFNu3jwflImAy_oux93NmlZRlbTXNvDE0QrLSbUo32c5/?to=rent",
+    "image_url": "https://i2.anton.market/dEIUOlRW9AIzRe2J9ePXAgnPxC0SM3Gd4HSpFs4VGZE/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJWNVhvektBMGUwNlo1eTZlTDdwV3JVVXBFb2xiUGhOZGNOUzBLNFpEazFqQ3Mvbi9mOWFhNzlmNjFkNWQ5ODRlNjNhNTUwMGFlM2E2ZmM3Ny53ZWJw",
+    "rarity": ""
+  },
+  {
     "name": "Mood Pack #49732",
     "gift_title": "Mood Pack",
     "number": "49732",
@@ -1570,6 +1609,19 @@
     "tg_link": "https://t.me/nft/MoodPack-49732",
     "market_link": "https://marketapp.org/nft/EQBQCIN3wKZnRWs48mrz_zGIpzeXHNY5uYAALw3TJyD4bC_q/?to=rent",
     "image_url": "https://i2.anton.market/gsuqu3tJstzPdgQQaV6nUb3nOO1kd8IqzGxk0zuMrhs/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJWNVhvektBMGUwNlo1eTZlTDdwV3JVVXBFb2xiUGhOZGNOUzBLNFpEazFqQ3Mvbi9lZjY3Y2ZlZWNlYWMyYzcwNjA0ZjMwYzdiMWQ4NjdkNS53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Mood Pack #50141",
+    "gift_title": "Mood Pack",
+    "number": "50141",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/MoodPack-50141",
+    "market_link": "https://marketapp.org/nft/EQARVBTsMooDCoR1Q_1XrLRblUEl38QZFCxVn8UgZK7CBJ3b/?to=rent",
+    "image_url": "https://i2.anton.market/xjxhPCRQPdlmLCUXVSHizxQx2kzSwRAnsOeLhtdpZm8/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJWNVhvektBMGUwNlo1eTZlTDdwV3JVVXBFb2xiUGhOZGNOUzBLNFpEazFqQ3Mvbi9lZDY3YzMyMWU5ZDM5MDQ2ODIwZTk3OGZkZGMxMWM3ZC53ZWJw",
     "rarity": ""
   },
   {
@@ -1612,6 +1664,19 @@
     "rarity": ""
   },
   {
+    "name": "Mood Pack #94178",
+    "gift_title": "Mood Pack",
+    "number": "94178",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 50",
+    "tg_link": "https://t.me/nft/MoodPack-94178",
+    "market_link": "https://marketapp.org/nft/EQDIcr4SLSR7ynGGv4CKxtzU_NNLyrEc8Yz7euPaCrIsMfXi/?to=rent",
+    "image_url": "https://i2.anton.market/AlPuDCHw2_Xf-Tuzm2Z4KVUqelpHZB9JfP_idB0poqQ/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJWNVhvektBMGUwNlo1eTZlTDdwV3JVVXBFb2xiUGhOZGNOUzBLNFpEazFqQ3Mvbi81OTgyZjhiYjkxYTBjZWRlNjk0NWVmNTVkOTJjMDcxYS53ZWJw",
+    "rarity": ""
+  },
+  {
     "name": "Mood Pack #94204",
     "gift_title": "Mood Pack",
     "number": "94204",
@@ -1648,19 +1713,6 @@
     "tg_link": "https://t.me/nft/MoodPack-94798",
     "market_link": "https://marketapp.org/nft/EQBrmE6UwPTAzjFQyoCC3E82CkjObMCLLaLwOSTt3e9jjmA2/?to=rent",
     "image_url": "https://i2.anton.market/ozKNt2IIaWRohdoqwuejU5O-M4CjF2gvcysJG3shqf8/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJWNVhvektBMGUwNlo1eTZlTDdwV3JVVXBFb2xiUGhOZGNOUzBLNFpEazFqQ3Mvbi9iMDkzZThiNjM1NmU0ODcyYjk4YWEzZjJlODlmY2RiMS53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Mood Pack #94855",
-    "gift_title": "Mood Pack",
-    "number": "94855",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/MoodPack-94855",
-    "market_link": "https://marketapp.org/nft/EQByABkXu9ZtxHG6BRHTnR48qE32dkpt6fiAgkz_PE9OmS2x/?to=rent",
-    "image_url": "https://i2.anton.market/Ez4XBEnOp_6be5ue11-6DHeISLZtQbdf_cf1Pd5Fxts/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJWNVhvektBMGUwNlo1eTZlTDdwV3JVVXBFb2xiUGhOZGNOUzBLNFpEazFqQ3Mvbi8yMWNiN2VmNjgxN2JkMTRjM2ExYTYwYjY2NTA5Y2Q1ZS53ZWJw",
     "rarity": ""
   },
   {
@@ -1950,29 +2002,16 @@
     "rarity": ""
   },
   {
-    "name": "Snoop Dogg #494059",
+    "name": "Snoop Dogg #519810",
     "gift_title": "Snoop Dogg",
-    "number": "494059",
+    "number": "519810",
     "discount": "-50.0%",
     "discount_num": 50.0,
     "price_per_day": "0.01",
     "days_range": "1 – 50",
-    "tg_link": "https://t.me/nft/SnoopDogg-494059",
-    "market_link": "https://marketapp.org/nft/EQBcLaG1eRLB4jWUvKPD-uYGcOsuZOM1Tz5-8pHdhjf1RaJQ/?to=rent",
-    "image_url": "https://i2.anton.market/W1d7cULsYs5Fg3-qiZbUwd1wyL3ZoBNLXFOcdsri_nk/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFvSnc3QnBPY0JEM3k5dm9NdUVRLXFoUzNLNGd0TS02RWVQTHhrems4aVNpZlgvbi9hYTcxZTgyMjQwNDQ2YjljZGU2ZmE1M2FmODY2NjE4ZC53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Snoop Dogg #520644",
-    "gift_title": "Snoop Dogg",
-    "number": "520644",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 50",
-    "tg_link": "https://t.me/nft/SnoopDogg-520644",
-    "market_link": "https://marketapp.org/nft/EQBDCUVee00BgyiYQgeXMGn1rbNh2rM1tNnJS5fBU6O3GlNr/?to=rent",
-    "image_url": "https://i2.anton.market/cxz5oSVq451ZsDtXB8kuqFvogHhxx2gSc06bMi4GBU8/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFvSnc3QnBPY0JEM3k5dm9NdUVRLXFoUzNLNGd0TS02RWVQTHhrems4aVNpZlgvbi9iOTExNGE5NjIwNDcyZGZiOWFjNjBkYmIzYzkyOGQ2NS53ZWJw",
+    "tg_link": "https://t.me/nft/SnoopDogg-519810",
+    "market_link": "https://marketapp.org/nft/EQDM6xPyT8VMYjycSCMAGgmxom9AD5HMLN4YUkB6_jmGL4Yd/?to=rent",
+    "image_url": "https://i2.anton.market/RjvtT8qsdxMBX8AhB9K1TtceNYX-B-unssgKAP_e2zI/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFvSnc3QnBPY0JEM3k5dm9NdUVRLXFoUzNLNGd0TS02RWVQTHhrems4aVNpZlgvbi8zNTBhYTUxNzFmMjQ5YjNkOWI1OTMyYjRjYjZlZGQyNi53ZWJw",
     "rarity": ""
   },
   {
@@ -1986,19 +2025,6 @@
     "tg_link": "https://t.me/nft/SnoopDogg-520667",
     "market_link": "https://marketapp.org/nft/EQBCSRRwI3n7m3H6ZR8VheOZ5xM6hAnrzKA8l-b401UjEx3Q/?to=rent",
     "image_url": "https://i2.anton.market/dN13-EPkx31P8O9MvDbSPez1nkqSCPwpL9_kuMqmZiU/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFvSnc3QnBPY0JEM3k5dm9NdUVRLXFoUzNLNGd0TS02RWVQTHhrems4aVNpZlgvbi81NjJmZDUzYTQ1ZTcxZWU2YWYyZTYxMGQ3MDRlMjkyOS53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Snoop Dogg #521688",
-    "gift_title": "Snoop Dogg",
-    "number": "521688",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/SnoopDogg-521688",
-    "market_link": "https://marketapp.org/nft/EQCUkC9EfzZHhD08iEFlVLHNx-fdQyEaUVtiW7_MJQosDTLb/?to=rent",
-    "image_url": "https://i2.anton.market/yZerH0ZYp_QFC0Kj3ptnG7m1jX2wo33NGuQYIsj8FGM/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFvSnc3QnBPY0JEM3k5dm9NdUVRLXFoUzNLNGd0TS02RWVQTHhrems4aVNpZlgvbi9kNmUzNmIxM2U1YWFkMzEzZjI1YjEyYTMxNWYxYWE0ZC53ZWJw",
     "rarity": ""
   },
   {
@@ -2025,19 +2051,6 @@
     "tg_link": "https://t.me/nft/SnoopDogg-521761",
     "market_link": "https://marketapp.org/nft/EQBV4sF-SGsExA_1FfOX9qLyCgjGE02KmWciAJX3l0eV1tt6/?to=rent",
     "image_url": "https://i2.anton.market/AeIoNyX3OiiPX3-ptFhx7aSC-n0Z5hS1N6wlv0HpwLM/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFvSnc3QnBPY0JEM3k5dm9NdUVRLXFoUzNLNGd0TS02RWVQTHhrems4aVNpZlgvbi8wZjgxYzI3YWZmNDc1YjI5ZThhYWY5MjRjMmQxNWUwYS53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Snoop Dogg #522396",
-    "gift_title": "Snoop Dogg",
-    "number": "522396",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/SnoopDogg-522396",
-    "market_link": "https://marketapp.org/nft/EQAat1amz9DyQwaD4EyefAQaZUQXAPl7_0IT8G5k9jPx_Lw6/?to=rent",
-    "image_url": "https://i2.anton.market/OvqU6-1cz2NC0dNUU2hJu0HJgwOoda6uNMnm0bYnKKY/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFvSnc3QnBPY0JEM3k5dm9NdUVRLXFoUzNLNGd0TS02RWVQTHhrems4aVNpZlgvbi9jMjEzOWU2YjRiN2JiNTg0MGZlOTU5ZjUzNDQxYWQwYy53ZWJw",
     "rarity": ""
   },
   {
@@ -2158,6 +2171,19 @@
     "rarity": ""
   },
   {
+    "name": "Stellar Rocket #21390",
+    "gift_title": "Stellar Rocket",
+    "number": "21390",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/StellarRocket-21390",
+    "market_link": "https://marketapp.org/nft/EQCypzpHlyT_yUQGVNnI6ATuhRJ6AVvjRG2bhwq3V9jvHxHu/?to=rent",
+    "image_url": "https://i2.anton.market/IZ6D_mGC3INBDklx_WFL8IhJHvBo4TXEd3-e0MxvEl0/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURJcnVTVHl4dnE2MGdVSDhqMmtrajNxem9CckJhSnk5V2tLYmVOTlJhc1dlNGovbi8zYTlkZmRlMDllOTE4OWUyMmIxMDdiZGQ1ZjdhNWM3My53ZWJw",
+    "rarity": ""
+  },
+  {
     "name": "Stellar Rocket #23175",
     "gift_title": "Stellar Rocket",
     "number": "23175",
@@ -2210,16 +2236,16 @@
     "rarity": ""
   },
   {
-    "name": "Swag Bag #204368",
-    "gift_title": "Swag Bag",
-    "number": "204368",
+    "name": "Surge Board #28977",
+    "gift_title": "Surge Board",
+    "number": "28977",
     "discount": "-50.0%",
     "discount_num": 50.0,
     "price_per_day": "0.01",
     "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/SwagBag-204368",
-    "market_link": "https://marketapp.org/nft/EQBGCdjJk29N-YAP879ljwdMQjv-sW_9R3unmnReZhtIHNw0/?to=rent",
-    "image_url": "https://i2.anton.market/iq18R9QHOfIROnKqn6s7RpoQXdIagpQb178fo_J2Gjs/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUNnYVR4YjJ3QV8zQmk4RWM0RkZOdThDYXVvSG8wVlBwbnd4ZHJoQWdPck9YdkEvbi9lMWEwMjJkNjBhYmU0YTNjMDMzZGU2Njg2NGM0Mjk2NC53ZWJw",
+    "tg_link": "https://t.me/nft/SurgeBoard-28977",
+    "market_link": "https://marketapp.org/nft/EQB8ejZBhKdM_v46XkwdFl34vsIkZOLsc3PuBea9ZxPVnvMy/?to=rent",
+    "image_url": "https://i2.anton.market/l5L_0zvz8wu5SBEB--jmA6XHewnu03WBeKjGr0j11oI/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURMZGE3MTVHb2NQMXNZRGtDZWNQaE83ZUZOc052QVJENHB1bWJHU2FuOTZ3dlovbi9kMTRhOTA4NzBiOWJjZWYxOTQ1Mjg0ZDMwNWNiMjM1MS53ZWJw",
     "rarity": ""
   },
   {
@@ -2246,19 +2272,6 @@
     "tg_link": "https://t.me/nft/SwagBag-204653",
     "market_link": "https://marketapp.org/nft/EQBAkV2s0hid9GH1AOpSl3lZSsBkZ3l9W1Q9A2XM7EJq4iFc/?to=rent",
     "image_url": "https://i2.anton.market/ldeiXxF2AaRdchDGCQg9A-KuzB6T5o2mTgwJUnepVM0/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUNnYVR4YjJ3QV8zQmk4RWM0RkZOdThDYXVvSG8wVlBwbnd4ZHJoQWdPck9YdkEvbi9iZDNlYzg3Y2U2NzUwYjU2MTQyNTA1MmJkYmJkZTQ2Yi53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Swag Bag #204658",
-    "gift_title": "Swag Bag",
-    "number": "204658",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/SwagBag-204658",
-    "market_link": "https://marketapp.org/nft/EQDHOBiaVzuxb-UHB0m4VjlJ4vCPPRKRcLJqkcErbgBQiCDB/?to=rent",
-    "image_url": "https://i2.anton.market/hFNyc3rX2UMP5Esyql87tZj8YHc6qgHB-igzd0t-ZPo/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUNnYVR4YjJ3QV8zQmk4RWM0RkZOdThDYXVvSG8wVlBwbnd4ZHJoQWdPck9YdkEvbi9lNmU3ZWE5YzFiNjdhMTM3ZDRmNzM4ZTFkNjVmMGYzNy53ZWJw",
     "rarity": ""
   },
   {
@@ -2402,19 +2415,6 @@
     "tg_link": "https://t.me/nft/TimelessBook-41721",
     "market_link": "https://marketapp.org/nft/EQDL-egLlP6gbzfNMxjj2mXnSw363lLEeH01oeKIQpjNHWw1/?to=rent",
     "image_url": "https://i2.anton.market/o7H9VjusV4mcg-76h7cA2ioi0p_CpmoVkvqJvELGwio/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUMyMTJkanJxMGdnbFFYaThNU0ZYMWJjdzRMSHczRXM2MmxLdnQxbFp6enNZdUYvbi9mMmEyYjMwYjVkMTg5ZDRmMTY1NDdhMmE3YmJiZmIwZi53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Timeless Book #42161",
-    "gift_title": "Timeless Book",
-    "number": "42161",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/TimelessBook-42161",
-    "market_link": "https://marketapp.org/nft/EQAlJlOHeN65c-LWqoi_TajcuGVK3rDb7DbhN98k-VZHSnj1/?to=rent",
-    "image_url": "https://i2.anton.market/inb66Qn6ZICSpYtwIJJdnXg2srXJ3e0tUpS4kJfu7TQ/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUMyMTJkanJxMGdnbFFYaThNU0ZYMWJjdzRMSHczRXM2MmxLdnQxbFp6enNZdUYvbi8yM2VjN2E1MGUxNmUyNmMxNDRjZThlYjIwYTQzMzE5Zi53ZWJw",
     "rarity": ""
   },
   {
@@ -2574,16 +2574,16 @@
     "rarity": ""
   },
   {
-    "name": "Victory Medal #41069",
-    "gift_title": "Victory Medal",
-    "number": "41069",
+    "name": "Vice Cream #359361",
+    "gift_title": "Vice Cream",
+    "number": "359361",
     "discount": "-50.0%",
     "discount_num": 50.0,
     "price_per_day": "0.01",
-    "days_range": "1 – 50",
-    "tg_link": "https://t.me/nft/VictoryMedal-41069",
-    "market_link": "https://marketapp.org/nft/EQBdHlteOLjUaJe_vq3emTdNoroyvK6mdsTvHhAzuWgI673m/?to=rent",
-    "image_url": "https://i2.anton.market/BZeDqV4MhDZ3FG6-hhFAJT4O0WEUXWxWyga-4c9-H9M/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUMtWmRzb3VGVS14TWE1MDl5UDhrektjZVpuR1Y3bFNRc2t4aW1hMU1yM2lEWUIvbi9mMjU4NjZkODcxOWM4YTlmM2NkZGM2MTcwZTQzMjk1Yy53ZWJw",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/ViceCream-359361",
+    "market_link": "https://marketapp.org/nft/EQBv3HwwzJTVJqS64KEhpzB7C-e1tZSCprIo3LRMJ83Hn1qB/?to=rent",
+    "image_url": "https://i2.anton.market/z2Bsxhu8nTWTfo2AvyQq4Nt-gwA-jK6TW989ltG1YJ8/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURjMDhZeHpaV3RsS0FvaFN5Yk5jM2tYQWtBUFB0SGNoLWpZX0U2S01RM2IxbW4vbi8yOTQ0NTg5ZjdjNjNkNjQxYTRlMDkzY2Y1NjU0NTE1Zi53ZWJw",
     "rarity": ""
   },
   {
