@@ -104,6 +104,19 @@
     "rarity": ""
   },
   {
+    "name": "Bow Tie #18354",
+    "gift_title": "Bow Tie",
+    "number": "18354",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/BowTie-18354",
+    "market_link": "https://marketapp.org/nft/EQALAaHHLWZio8RJVnlyadDdBCFQT9snajv8rTPAICRWigF-/?to=rent",
+    "image_url": "https://i2.anton.market/q3KBeAOTix9h4RReTpTD18_2WW7SdR67xIaA9yJkLHU/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURweEo2VkF3VUEtdFg2dzhBQ25vQUpMclAzaEtXbWllQmw3MXV2MV9xS1JEM3gvbi9kOTNjNDlhMzFjNzlhOWQ0YWYzNTYyNjhkZjM5NWIxZS53ZWJw",
+    "rarity": ""
+  },
+  {
     "name": "Chill Flame #438892",
     "gift_title": "Chill Flame",
     "number": "438892",
@@ -2480,19 +2493,6 @@
     "tg_link": "https://t.me/nft/ViceCream-359328",
     "market_link": "https://marketapp.org/nft/EQAFDR5PVzn_MY0Ae91WP0PyI0E0TQVSmjlrDEvOR4s4mUWR/?to=rent",
     "image_url": "https://i2.anton.market/a84Qvo9ugyZdu5qLR1Rd0q4XRjnTvsL5iIrX-cZ2Uvs/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURjMDhZeHpaV3RsS0FvaFN5Yk5jM2tYQWtBUFB0SGNoLWpZX0U2S01RM2IxbW4vbi9mNGIwNmFkOGEzNmJiNjE2YjYyMTIyMGE1NTdjYThiZi53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Vice Cream #359348",
-    "gift_title": "Vice Cream",
-    "number": "359348",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/ViceCream-359348",
-    "market_link": "https://marketapp.org/nft/EQBcRWErBXMgsTFh0_xXu1OZycstV6elM5AQB5J-NXD89eIs/?to=rent",
-    "image_url": "https://i2.anton.market/R8282KYlmCZZkyjbgV6p6vIcd72P85aaVRHDxqAK39k/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURjMDhZeHpaV3RsS0FvaFN5Yk5jM2tYQWtBUFB0SGNoLWpZX0U2S01RM2IxbW4vbi8xZDM5N2JiZGQ0MDZhODNiOGY2ZjVmMmNkN2Y3MmI4MS53ZWJw",
     "rarity": ""
   },
   {
