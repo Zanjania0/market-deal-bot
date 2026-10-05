@@ -65,19 +65,6 @@
     "rarity": ""
   },
   {
-    "name": "B-Day Candle #116695",
-    "gift_title": "B-Day Candle",
-    "number": "116695",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/BDayCandle-116695",
-    "market_link": "https://marketapp.org/nft/EQDdXYmPUB08N4B78w7hPDkdACzoQhwkaBzOySvofCJ6m_L-/?to=rent",
-    "image_url": "https://i2.anton.market/iPyPUAG3dQ28-hdFe-SLqnXpAJEbaKfDfzr93W95Vzc/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUN3RUZmVWJiUi0yMmZuM1ZneFVwQmlsN2J3QlFxRUhtN3dnUVliV1k5YzA4WUovbi8zOTEyYzRhYWUyYjk1ZWMxMDZlOWE4OTMxYzc4NzkyOC53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "B-Day Candle #121979",
     "gift_title": "B-Day Candle",
     "number": "121979",
@@ -2597,6 +2584,19 @@
     "tg_link": "https://t.me/nft/FreshSocks-60968",
     "market_link": "https://marketapp.org/nft/EQBhNkSJElMzPTK0tiRLitGzYL0Rahsc3c276uC1dJkKXiGr/?to=rent",
     "image_url": "https://i2.anton.market/0rzKdyKMn2gCYQkvEyi9SMpAXafH0ic5TLsPKGzQcao/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUFVZmZRV2wwOV95aFhEVHA4b04xM1B4OHlnUG0weGN5TkdoSE9pT05WLXgzb20vbi80ZDc2YzJiZjhkNDYzNWI5MWI4ZTNlYmQzZGFiM2QwOC53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Ginger Cookie #104162",
+    "gift_title": "Ginger Cookie",
+    "number": "104162",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/GingerCookie-104162",
+    "market_link": "https://marketapp.org/nft/EQBd6wij9p_W8afAy8yOYgxzdUdLi3m-SBU4QuXe6NWC9TKz/?to=rent",
+    "image_url": "https://i2.anton.market/DjEmlNXCx_sB45VOOzhkY2Kx9A5BNYPU37UERQpsb4Y/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJDZTc1RzBBaGpxQzY0QjdIX0JIUDB3Z2ZPTlhfeDk4cnN6bXNFd25kRFZBakcvbi9kZDQ4OTZiYWZjOTUyZWZkMzI0MWE1ZDY5MjgzZThhZC53ZWJw",
     "rarity": ""
   }
 ]
