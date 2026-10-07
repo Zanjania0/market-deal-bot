@@ -2522,19 +2522,6 @@
     "rarity": ""
   },
   {
-    "name": "Cupid Charm #11397",
-    "gift_title": "Cupid Charm",
-    "number": "11397",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/CupidCharm-11397",
-    "market_link": "https://marketapp.org/nft/EQBGVEUq3k_c_fNHMbJagaP-Q161rfmJTNpYakGxGnbngRAt/?to=rent",
-    "image_url": "https://i2.anton.market/NQW9eR8FCSeM9GH0FzsNKa37wlxB440J0l719zToVvc/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUEwSkJpVkNqZGdxa2lIaVltSWdUVUJiWkk2bU5iblN5bXFmMEhGQzdGaHhwdVQvbi84ZjVhYzY4MTQ1YzEwNzk2ZGFhNjRjMzAwZmJmNjVlZC53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "Desk Calendar #28770",
     "gift_title": "Desk Calendar",
     "number": "28770",
@@ -2597,6 +2584,19 @@
     "tg_link": "https://t.me/nft/FaithAmulet-65682",
     "market_link": "https://marketapp.org/nft/EQDhJJhJBLvzcrXgLxmBdeeFKBJ7O_X2zCKSrGu1WKQhw5TA/?to=rent",
     "image_url": "https://i2.anton.market/-Yth5WCHQgnDdBFzaf9IhecAxJaAL7EJXTiXAr3MHGA/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUQ5ejg3aFJaQVY3QzJNVjFnazM5LWJTZzVZZnMyRWRNcjlIZks4MUl1QjJSbGMvbi9jOWFiMzkxMTIxZjExODgzYWQ5MjI2MDA3NmM5NDliNi53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Fine Pen #9316",
+    "gift_title": "Fine Pen",
+    "number": "9316",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/FinePen-9316",
+    "market_link": "https://marketapp.org/nft/EQCJJxqOnE9l9Kxh_Zw7DkyrQdMBT__Pi3Gg-kn6IpZuQZmd/?to=rent",
+    "image_url": "https://i2.anton.market/CMlNZc2sV3v-KWskNA_kl-Gh0N0PKloVI8hipBNRTeA/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJDd0ZuYWxOMGFHem9KZ1ZpaHRNTFRlWHVLT190SEl4cTdiZGRObG5IMkpvVkIvbi80NWFhYzQxZGFhMzU4ZjczZDA5ODUzZDgwNzBiYTMwYy53ZWJw",
     "rarity": ""
   }
 ]
