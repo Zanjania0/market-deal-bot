@@ -2574,19 +2574,6 @@
     "rarity": ""
   },
   {
-    "name": "Ginger Cookie #104162",
-    "gift_title": "Ginger Cookie",
-    "number": "104162",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/GingerCookie-104162",
-    "market_link": "https://marketapp.org/nft/EQBd6wij9p_W8afAy8yOYgxzdUdLi3m-SBU4QuXe6NWC9TKz/?to=rent",
-    "image_url": "https://i2.anton.market/DjEmlNXCx_sB45VOOzhkY2Kx9A5BNYPU37UERQpsb4Y/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJDZTc1RzBBaGpxQzY0QjdIX0JIUDB3Z2ZPTlhfeDk4cnN6bXNFd25kRFZBakcvbi9kZDQ4OTZiYWZjOTUyZWZkMzI0MWE1ZDY5MjgzZThhZC53ZWJw",
-    "rarity": ""
-  },
-  {
     "name": "Ginger Cookie #108960",
     "gift_title": "Ginger Cookie",
     "number": "108960",
@@ -2597,6 +2584,19 @@
     "tg_link": "https://t.me/nft/GingerCookie-108960",
     "market_link": "https://marketapp.org/nft/EQB6ZYaqrrLNakQ1QcGxH7mKfWcwZO7KK5XWp97HRhU4Ux3D/?to=rent",
     "image_url": "https://i2.anton.market/lId55G5bnwdlLQ3rjaBNJakAOAKKzDBmav9PEhXOd-o/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUJDZTc1RzBBaGpxQzY0QjdIX0JIUDB3Z2ZPTlhfeDk4cnN6bXNFd25kRFZBakcvbi84MjdhOWI4OGY0NTc4NDhjMWY1MmU5YjNhYWVkZWVhZi53ZWJw",
+    "rarity": ""
+  },
+  {
+    "name": "Hanging Star #17541",
+    "gift_title": "Hanging Star",
+    "number": "17541",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/HangingStar-17541",
+    "market_link": "https://marketapp.org/nft/EQCwVwzVMSGjDlqoupK1WUdtgjjZcQJVFO0T_oB0ooKFFzAb/?to=rent",
+    "image_url": "https://i2.anton.market/z6rNTybTDv6qqTxoTyX6s-T1y9d1iCymJAqHatOLL2s/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUI4ekx6RU9GUUszcVR5TVlnUEQ4QnV6bU53Ymxub3VxYUI4MFBXLXMyRTduY3Qvbi83MmEwOTc2M2JhYjI3OWVlZDhjYzM4M2YyMWJkNzAyMC53ZWJw",
     "rarity": ""
   }
 ]
