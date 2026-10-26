@@ -1664,6 +1664,19 @@
     "rarity": ""
   },
   {
+    "name": "Vice Cream #358952",
+    "gift_title": "Vice Cream",
+    "number": "358952",
+    "discount": "-50.0%",
+    "discount_num": 50.0,
+    "price_per_day": "0.01",
+    "days_range": "1 – 180",
+    "tg_link": "https://t.me/nft/ViceCream-358952",
+    "market_link": "https://marketapp.org/nft/EQDtvkxe07WywATUnXkcIriSE6C1fLtXSSkywt19irmlox81/?to=rent",
+    "image_url": "https://i2.anton.market/U_ORWRpX8ArnwgqJ8nFYfXCUn_Fuiavo4Mu79cqKS_E/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURjMDhZeHpaV3RsS0FvaFN5Yk5jM2tYQWtBUFB0SGNoLWpZX0U2S01RM2IxbW4vbi85NGQ5ZGQ5MTc5OTA5YmI4MTY5N2IxMjAzNzJlY2I3Ny53ZWJw",
+    "rarity": ""
+  },
+  {
     "name": "Vice Cream #358954",
     "gift_title": "Vice Cream",
     "number": "358954",
@@ -2584,19 +2597,6 @@
     "tg_link": "https://t.me/nft/ViceCream-359393",
     "market_link": "https://marketapp.org/nft/EQDPd1mFMJp8bcdwmjmI4ZvvLvNAr_TpvXhTmwFTrvQ0xqBY/?to=rent",
     "image_url": "https://i2.anton.market/0ZUHsg4DIfgCBsVIcLjspJXqDfWg5GdIBnCOWmEWNW8/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUURjMDhZeHpaV3RsS0FvaFN5Yk5jM2tYQWtBUFB0SGNoLWpZX0U2S01RM2IxbW4vbi85YmI0ZTRmN2QyMmRjZDhmNTM1YjI4ZTgzZDJmZWVjZS53ZWJw",
-    "rarity": ""
-  },
-  {
-    "name": "Victory Medal #4490",
-    "gift_title": "Victory Medal",
-    "number": "4490",
-    "discount": "-50.0%",
-    "discount_num": 50.0,
-    "price_per_day": "0.01",
-    "days_range": "1 – 180",
-    "tg_link": "https://t.me/nft/VictoryMedal-4490",
-    "market_link": "https://marketapp.org/nft/EQADl9Ge5tCAAM5NfsqNZxjswnUNcE-UbGUruMtERCADof4z/?to=rent",
-    "image_url": "https://i2.anton.market/wjj8OmsGpg1Pv97oPYjwBo4LMK1FrN5LNEG5w1SuMXY/rs:fill:500:500:1/g:ce/czM6Ly9tYXJrZXRhcHAvYy9FUUMtWmRzb3VGVS14TWE1MDl5UDhrektjZVpuR1Y3bFNRc2t4aW1hMU1yM2lEWUIvbi9jMGNjNTQ4NDBiYmY0MmNmMWQ0M2I3ZWNhNjg2YjczMi53ZWJw",
     "rarity": ""
   }
 ]
